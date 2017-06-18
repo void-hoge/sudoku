@@ -19,8 +19,8 @@ public:
 private:
 	base cells[16];
 	base confirmedCells[16];
-	void updateConfirmedCells();
 	void set(int, int);
+	void updateConfirmedCells();
 	void setConfirmedCells(int, int);
 	bool checkError();
 };
