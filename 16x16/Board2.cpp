@@ -36,6 +36,7 @@ bool Board::update(){
 				}
 			}
 		}
+		/*if there are some errors, return false.*/
 		if (checkError()) {
 			return false;
 		}
@@ -49,7 +50,6 @@ bool Board::isFinish(){
 	return (~(OR(confirmedCells)) == 0);
 }
 
-/*Returns true if there is an error.*/
 bool Board::checkError(){
 	/*When there is a cell that can't substitute any thing.*/
 	return (~(OR(cells)) != 0);
@@ -70,22 +70,4 @@ int Board::emptyCell(){
 			return i;
 		}
 	}
-}
-
-void binary(base n){
-	for (int i = 0; i < 256; i++) {
-		if ((i % 16) == 0) cout << endl;
-		cout << n[i];
-	}
-	cout << endl;
-}
-
-void Board::debug(){
-	// for (int i = 0; i < 16; i++) {
-	// 	cout << "**" << i << "**" << endl;
-	// 	binary(cells[i]);
-	// 	cout << endl;
-	// }
-	binary(OR(cells));
-	return;
 }
