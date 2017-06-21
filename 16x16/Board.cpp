@@ -65,12 +65,12 @@ void Board::output(){
 
 		for (int j = 0; j < 16; ++j){
 			if ((confirmedCells[j] & scanner) != 0){
-				cout << setw(3) << setfill(' ') << j+1;					//確定している場合
+				cout << setw(3) << setfill(' ') << j+1;
 				goto hoge;
 			}
 		}
 
-		cout <<setw(3) << setfill(' ') << " ";							//未確定の場合
+		cout <<setw(3) << setfill(' ') << " ";
 		hoge:;
 
 
