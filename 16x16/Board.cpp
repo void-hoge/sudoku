@@ -25,7 +25,6 @@ base OR(base *n){
 /**********************************public methods**********************************/
 
 
-/*constructor*/
 Board::Board(){
 	for (int i = 0; i < 16; i++) {
 		cells[i] = maxBase;
@@ -193,6 +192,5 @@ void Board::setConfirmedCells(int coordinate, int c){
 }
 
 bool Board::checkError(){
-	/*When there is a cell that can't substitute any thing.*/
 	return (~(OR(cells)) != 0);
 }
