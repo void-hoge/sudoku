@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         table->setItem(i/tableSize, i%tableSize, itemptr);
         itemPtrs[i] = itemptr;
     }
+    table->resizeColumnsToContents();
+    table->resizeRowsToContents();
 }
 
 MainWindow::~MainWindow() {
