@@ -1,3 +1,4 @@
+//g++ main.cpp Board.cpp
 #include "Board.h"
 #include <iostream>
 #include <bitset>
