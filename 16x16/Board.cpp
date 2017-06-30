@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
+#define base bitset<256>
 
 const base minBase = 0;
 const base maxBase = ~minBase;
@@ -24,6 +25,7 @@ base OR(base *n){
 /**********************************public methods**********************************/
 
 
+/*constructor*/
 Board::Board(){
 	for (int i = 0; i < 16; i++) {
 		cells[i] = maxBase;
@@ -64,12 +66,12 @@ void Board::output(){
 
 		for (int j = 0; j < 16; ++j){
 			if ((confirmedCells[j] & scanner) != 0){
-				cout << setw(3) << setfill(' ') << j+1;
+				cout << setw(3) << setfill(' ') << j+1;					//確定している場合
 				goto hoge;
 			}
 		}
 
-		cout <<setw(3) << setfill(' ') << " ";
+		cout <<setw(3) << setfill(' ') << " ";							//未確定の場合
 		hoge:;
 
 
@@ -77,6 +79,15 @@ void Board::output(){
 	}
 
 	cout << "|\n+-------+-------+-------+-------+-------+-------+-------+-------+" << endl;
+}
+
+int Board::check(int coordinate){
+	for (int i = 0; i < 16; i++) {
+		if (confirmedCells[i][coordinate]) {
+			return i;
+		}
+	}
+	return (-1);
 }
 
 void Board::put(int coordinate, int c){
@@ -191,5 +202,6 @@ void Board::setConfirmedCells(int coordinate, int c){
 }
 
 bool Board::checkError(){
+	/*When there is a cell that can't substitute any thing.*/
 	return (~(OR(cells)) != 0);
 }
