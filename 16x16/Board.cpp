@@ -4,7 +4,6 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
-#define base bitset<256>
 
 const base minBase = 0;
 const base maxBase = ~minBase;

@@ -2,9 +2,8 @@
 #define __BOARD_H_INCLUDED__
 
 #include <bitset>
-using namespace std;
 
-#define base bitset<256>
+#define base std::bitset<256>
 
 class Board{
 public:
@@ -13,7 +12,7 @@ public:
 	void output();
 	void put(int, int);
 	bool update();
-	bitset<16> setableNumber(int);
+    std::bitset<16> setableNumber(int);
 	int emptyCell();
 	bool isFinish();
 protected:
