@@ -16,7 +16,7 @@ public:
 	bitset<16> setableNumber(int);
 	int emptyCell();
 	bool isFinish();
-private:
+protected:
 	base cells[16];
 	base confirmedCells[16];
 	void set(int, int);
