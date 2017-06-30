@@ -15,6 +15,7 @@ public:
     std::bitset<16> setableNumber(int);
 	int emptyCell();
 	bool isFinish();
+    int check(int coodinate);
 protected:
 	base cells[16];
 	base confirmedCells[16];
