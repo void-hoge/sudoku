@@ -11,17 +11,17 @@ namespace Ui {
 }
 
 class MainWindow : public QMainWindow {
-    Q_OBJECT
+        Q_OBJECT
+    public:
+        explicit MainWindow(QWidget *parent = 0);
+        ~MainWindow();
 
-public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    Ui::MainWindow *ui;
-    static constexpr int tableSize = 16;
-    BoardFacade board;
-    QTableWidget* table;
+    private:
+        Ui::MainWindow *ui;
+        BoardFacade board;
+        QTableWidget* table;
+    protected slots:
+        void activate_debug_mode();
 };
 
 #endif // MAINWINDOW_H

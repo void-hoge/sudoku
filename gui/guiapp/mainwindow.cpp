@@ -21,10 +21,11 @@ namespace {
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), board{ } {
     ui->setupUi(this);
+    connect(ui->actionActivate_debug_mode, SIGNAL(triggered()), this, SLOT(activate_debug_mode()));
     table = ui->tableWidget;
     QTableWidgetItemAdapter controller(*table);
-    table->setRowCount(tableSize);
-    table->setColumnCount(tableSize);
+    table->setRowCount(eachside);
+    table->setColumnCount(eachside);
     init_table(*table);
     {
         auto itr = controller.begin();
@@ -42,4 +43,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 MainWindow::~MainWindow() {
     delete ui;
     delete_all_item(*table);
+}
+
+void MainWindow::activate_debug_mode() {
+
 }
