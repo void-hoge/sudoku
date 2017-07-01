@@ -4,6 +4,7 @@
 #include <array>
 #include <QMainWindow>
 #include <QTableWidgetItem>
+#include "board_facade.h"
 
 namespace Ui {
     class MainWindow;
@@ -19,7 +20,8 @@ public:
 private:
     Ui::MainWindow *ui;
     static constexpr int tableSize = 16;
-    std::array<QTableWidgetItem*, tableSize*tableSize> itemPtrs;
+    BoardFacade board;
+    QTableWidget* table;
 };
 
 #endif // MAINWINDOW_H

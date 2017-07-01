@@ -2,17 +2,13 @@
 #define BOARD_FACADE_H
 
 #include <array>
+#include "param.h"
 #include "../../16x16/Board.h"
 
-class BoardFacade {
+class BoardFacade: private Board {
     public:
         BoardFacade();
-    private:
-        class OpenBoard : private Board {
-            public:
-                using CellsArray = std::array<std::bitset<256>, 16>;
-                CellsArray getConfirmed() const noexcept;
-        } openBoard;
+        std::array<int, all_cells_count> checked_array();
 };
 
 #endif // BOARD_FACADE_H

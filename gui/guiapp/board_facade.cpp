@@ -1,11 +1,15 @@
 #include "board_facade.h"
+#include "param.h"
 #include "../../16x16/Board.h"
 
-BoardFacade::BoardFacade(): openBoard {} {
+BoardFacade::BoardFacade() {
+
 }
 
-BoardFacade::OpenBoard::CellsArray BoardFacade::OpenBoard::getConfirmed() const noexcept {
-    CellsArray ret;
-    std::copy(std::begin(confirmedCells), std::end(confirmedCells), ret.begin());
+std::array<int, all_cells_count> BoardFacade::checked_array() {
+    std::array<int, all_cells_count> ret;
+    for (auto i=0; i<all_cells_count; ++i) {
+        ret.at(i) = check(i);
+    }
     return ret;
 }

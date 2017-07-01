@@ -27,12 +27,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
         ../../16x16/Board.cpp \
-    board_facade.cpp
+    board_facade.cpp \
+    qtablewidgetcontroller.cpp
 
 HEADERS += \
         mainwindow.h \
         ../../16x16/Board.h \
-    board_facade.h
+    board_facade.h \
+    param.h \
+    qtablewidgetcontroller.h
 
 FORMS += \
         mainwindow.ui
