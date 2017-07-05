@@ -26,18 +26,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-        ../../16x16/Board.cpp \
-    board_facade.cpp \
-    qtablewidgetcontroller.cpp \
-    debugwindow.cpp
+        ../../16x16/Board/Board.cpp \
+        board_facade.cpp \
+        qtablewidgetcontroller.cpp \
+        debugwindow.cpp
 
 HEADERS += \
         mainwindow.h \
-        ../../16x16/Board.h \
-    board_facade.h \
-    param.h \
-    qtablewidgetcontroller.h \
-    debugwindow.h
+        ../../16x16/Board/Board.h \
+        board_facade.h \
+        param.h \
+        qtablewidgetcontroller.h \
+        debugwindow.h
 
 FORMS += \
         mainwindow.ui \
