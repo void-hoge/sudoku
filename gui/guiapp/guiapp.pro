@@ -28,14 +28,17 @@ SOURCES += \
         mainwindow.cpp \
         ../../16x16/Board.cpp \
     board_facade.cpp \
-    qtablewidgetcontroller.cpp
+    qtablewidgetcontroller.cpp \
+    debugwindow.cpp
 
 HEADERS += \
         mainwindow.h \
         ../../16x16/Board.h \
     board_facade.h \
     param.h \
-    qtablewidgetcontroller.h
+    qtablewidgetcontroller.h \
+    debugwindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    debugwindow.ui

@@ -4,6 +4,7 @@
 #include "qtablewidgetcontroller.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "debugwindow.h"
 
 namespace {
     void init_table(QTableWidget& table) {
@@ -46,5 +47,8 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::activate_debug_mode() {
-
+    debugWindow = new DebugWindow();
+    debugWindow->setAttribute(Qt::WA_DeleteOnClose);
+    debugWindow->setAttribute(Qt::WA_ShowModal);
+    debugWindow->show();
 }
