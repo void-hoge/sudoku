@@ -26,9 +26,10 @@ class MainWindow : public QMainWindow {
         std::unique_ptr<DebugWindow> debugWindow;
 
         void closeEvent(QCloseEvent* event) override;
-    protected slots:
-        void switch_debug_mode();
-        void cell_clicked(int row, int column);
+    private slots:
+            void switch_debug_mode();
+            void cell_clicked(int row, int column);
+            void on_pushButton_released();
 };
 
 #endif // MAINWINDOW_H
