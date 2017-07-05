@@ -22,12 +22,18 @@ class QTableWidgetItemAdapter {
                     return *this;
                 }
                 inline QTableWidgetItem& operator *() noexcept {
-                    return * table.itemAt(cast_to_row(low_point), cast_to_column(low_point));
+                    auto* ret = table.itemAt(cast_to_row(low_point), cast_to_column(low_point));
+                    if (ret == nullptr) ret = new QTableWidgetItem(QString("Uninitialized"));
+                    return *ret;
+                }
+                inline int abs_index() noexcept {
+                    return low_point;
                 }
         };
         QTableWidgetItemAdapter(QTableWidget& to_be_adaptered);
         QTableWidgetItemIterator begin() const noexcept;
         QTableWidgetItemIterator end() const noexcept;
+        QTableWidgetItemIterator itemAt(int row, int column) const noexcept;
 };
 
 #endif // QTABLEWIDGETCONTROLLER_H

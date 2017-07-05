@@ -88,15 +88,18 @@
    </property>
    <widget class="QMenu" name="menutools">
     <property name="title">
-     <string>tools</string>
+     <string>Tools</string>
     </property>
-    <addaction name="actionActivate_debug_mode"/>
+    <addaction name="actionSwitch_debug_mode"/>
    </widget>
    <addaction name="menutools"/>
   </widget>
-  <action name="actionActivate_debug_mode">
+  <action name="actionSwitch_debug_mode">
    <property name="text">
-    <string>Activate debug mode</string>
+    <string>Switch debug mode</string>
+   </property>
+   <property name="toolTip">
+    <string>switch debug mode</string>
    </property>
   </action>
  </widget>

@@ -1,5 +1,9 @@
 #include "qtablewidgetcontroller.h"
 
+QTableWidgetItemAdapter::QTableWidgetItemIterator QTableWidgetItemAdapter::itemAt(int row, int column) const noexcept {
+    return QTableWidgetItemIterator(table, column + row*eachside);
+}
+
 QTableWidgetItemAdapter::QTableWidgetItemAdapter(QTableWidget& to_be_adaptered): table{to_be_adaptered} {
 
 }

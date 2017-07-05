@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <array>
+#include <memory>
 #include <QMainWindow>
 #include <QTableWidgetItem>
 #include "board_facade.h"
@@ -20,10 +21,14 @@ class MainWindow : public QMainWindow {
     private:
         Ui::MainWindow *ui;
         BoardFacade board;
+
         QTableWidget* table;
-        DebugWindow* debugWindow;
+        std::unique_ptr<DebugWindow> debugWindow;
+
+        void closeEvent(QCloseEvent* event) override;
     protected slots:
-        void activate_debug_mode();
+        void switch_debug_mode();
+        void cell_clicked(int row, int column);
 };
 
 #endif // MAINWINDOW_H
