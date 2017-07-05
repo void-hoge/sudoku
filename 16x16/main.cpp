@@ -1,3 +1,4 @@
+//g++ main.cpp Board/Board.cpp Solver/Solver.cpp
 #include "Solver/Solver.h"
 using namespace std;
 
