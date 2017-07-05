@@ -29,7 +29,8 @@ SOURCES += \
     board_facade.cpp \
     qtablewidgetcontroller.cpp \
     debugwindow.cpp \
-    ../../16x16/Board/Board.cpp
+    ../../16x16/Board/Board.cpp \
+    board_table_mapper.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -38,6 +39,7 @@ HEADERS += \
     debugwindow.h \
     qtablewidgetcontroller.h \
     ../../16x16/Board/Board.h \
+    board_table_mapper.h
 
 FORMS += \
     mainwindow.ui \
