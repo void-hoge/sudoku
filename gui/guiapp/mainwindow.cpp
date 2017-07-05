@@ -58,3 +58,7 @@ void MainWindow::cell_clicked(int row, int column) {
         debugWindow->indicate_abs_index(adap.itemAt(row, column).abs_index());
     }
 }
+
+void MainWindow::on_pushButton_released() {
+    board.update();
+}

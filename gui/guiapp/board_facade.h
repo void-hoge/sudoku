@@ -8,6 +8,7 @@
 class BoardFacade: private Board {
     public:
         BoardFacade();
+        using Board::update;
         std::array<int, all_cells_count> checked_array();
 };
 
