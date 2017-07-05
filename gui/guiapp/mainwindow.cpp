@@ -8,7 +8,6 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), board{ } {
     ui->setupUi(this);
-    connect(ui->actionSwitch_debug_mode, SIGNAL(triggered()), this, SLOT(switch_debug_mode()));
 
     // init member
     table = ui->tableWidget;
@@ -28,6 +27,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     table->resizeRowsToContents();
     table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    connect(ui->actionSwitch_debug_mode, SIGNAL(triggered()), this, SLOT(switch_debug_mode()));
     connect(table, SIGNAL(cellClicked(int,int)), this, SLOT(cell_clicked(int, int)));
 }
 
