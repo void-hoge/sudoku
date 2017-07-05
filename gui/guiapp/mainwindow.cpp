@@ -48,7 +48,5 @@ MainWindow::~MainWindow() {
 
 void MainWindow::activate_debug_mode() {
     debugWindow = new DebugWindow();
-    debugWindow->setAttribute(Qt::WA_DeleteOnClose);
-    debugWindow->setAttribute(Qt::WA_ShowModal);
     debugWindow->show();
 }
