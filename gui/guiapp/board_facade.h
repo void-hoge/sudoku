@@ -3,7 +3,7 @@
 
 #include <array>
 #include "param.h"
-#include "../../16x16/Board.h"
+#include "../../16x16/Board/Board.h"
 
 class BoardFacade: private Board {
     public:
