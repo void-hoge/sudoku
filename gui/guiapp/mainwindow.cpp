@@ -41,6 +41,15 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     if (debugWindow != nullptr) debugWindow->close();
 }
 
+void MainWindow::refresh_table() {
+    if (table == nullptr) std::runtime_error("table is null!");
+    auto itr = QTableWidgetItemAdapter(*table).begin();
+    for (auto& i : board.checked_array()) {
+        *itr = QTableWidgetItem(i == -1 ? " " : QString::number(i));
+        ++itr;
+    }
+}
+
 void MainWindow::switch_debug_mode() {
     if (debugWindow == nullptr) debugWindow = std::make_unique<DebugWindow>();
     if (debugWindow->isHidden()) {
@@ -61,4 +70,9 @@ void MainWindow::cell_clicked(int row, int column) {
 
 void MainWindow::on_pushButton_released() {
     board.update();
+}
+
+void MainWindow::on_tableWidget_itemChanged(QTableWidgetItem *item) {
+
+    refresh_table();
 }

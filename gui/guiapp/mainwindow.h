@@ -26,10 +26,14 @@ class MainWindow : public QMainWindow {
         std::unique_ptr<DebugWindow> debugWindow;
 
         void closeEvent(QCloseEvent* event) override;
+
+        void refresh_table();
+
     private slots:
             void switch_debug_mode();
             void cell_clicked(int row, int column);
             void on_pushButton_released();
+            void on_tableWidget_itemChanged(QTableWidgetItem *item);
 };
 
 #endif // MAINWINDOW_H
