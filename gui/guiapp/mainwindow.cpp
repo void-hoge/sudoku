@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // init member
     table = ui->tableWidget;
     // check
-    if (table == nullptr) std::runtime_error("Couldn't ui components on MainWindow.");
+    if (table == nullptr) std::runtime_error("Couldn't get ui components on MainWindow.");
 
     // init widgets
     table->setRowCount(eachside);
