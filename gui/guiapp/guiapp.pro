@@ -29,7 +29,9 @@ SOURCES += \
     board_facade.cpp \
     qtablewidgetcontroller.cpp \
     debugwindow.cpp \
-    ../../16x16/Board/Board.cpp
+    ../../16x16/Board/Board.cpp \
+    ../../16x16/Solver/Solver.cpp \
+    solver_facade.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -37,7 +39,9 @@ HEADERS += \
     param.h \
     debugwindow.h \
     qtablewidgetcontroller.h \
-    ../../16x16/Board/Board.h
+    ../../16x16/Board/Board.h \
+    ../../16x16/Solver/Solver.h \
+    solver_facade.h
 
 FORMS += \
     mainwindow.ui \

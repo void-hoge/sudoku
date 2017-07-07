@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QTableWidgetItem>
 #include "board_facade.h"
+#include "../../16x16/Solver/Solver.h"
 #include "debugwindow.h"
 
 namespace Ui {
