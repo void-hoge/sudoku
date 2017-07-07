@@ -6,7 +6,7 @@
 #include "ui_mainwindow.h"
 #include "debugwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), board{ } {
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), solver_m {} {
     ui->setupUi(this);
 
     // init member
@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     table->setColumnCount(eachside);
     QTableWidgetItemAdapter controller(*table);
     auto itr = controller.begin();
-    for (auto& i : board.checked_array()) {
+    for (auto& i : solver_m.result().checked_array()) {
         *itr = QTableWidgetItem(i == -1 ? " " : QString::number(i));
         ++itr;
     }
@@ -60,5 +60,5 @@ void MainWindow::cell_clicked(int row, int column) {
 }
 
 void MainWindow::on_pushButton_released() {
-    board.update();
+    solver_m.solve();
 }

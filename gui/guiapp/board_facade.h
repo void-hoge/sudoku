@@ -5,10 +5,13 @@
 #include "param.h"
 #include "../../16x16/Board/Board.h"
 
-class BoardFacade: private Board {
+class BoardFacade {
+        Board board_m;
     public:
-        BoardFacade();
-        using Board::update;
+        BoardFacade(Board& board);
+        BoardFacade(Board&& board = Board());
+
+        void update();
         std::array<int, all_cells_count> checked_array();
 };
 

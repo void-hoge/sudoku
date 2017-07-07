@@ -11,6 +11,7 @@ class solver_facade {
         solver_facade(Solver&& solver = Solver());
 
         BoardFacade result();
+        void solve();
 };
 
 #endif // SOLVER_FACADE_H

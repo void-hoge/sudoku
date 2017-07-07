@@ -5,7 +5,7 @@
 #include <memory>
 #include <QMainWindow>
 #include <QTableWidgetItem>
-#include "board_facade.h"
+#include "solver_facade.h"
 #include "../../16x16/Solver/Solver.h"
 #include "debugwindow.h"
 
@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow {
 
     private:
         Ui::MainWindow *ui;
-        BoardFacade board;
+        solver_facade solver_m;
 
         QTableWidget* table;
         std::unique_ptr<DebugWindow> debugWindow;
