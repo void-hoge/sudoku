@@ -2,9 +2,13 @@
 #define MAINWINDOW_H
 
 #include <array>
+#include <memory>
 #include <QMainWindow>
 #include <QTableWidgetItem>
-#include "board_facade.h"
+#include "mainwindow.h"
+#include "solver_facade.h"
+#include "table_fragment.h"
+#include "debugwindow.h"
 
 namespace Ui {
     class MainWindow;
@@ -17,11 +21,17 @@ class MainWindow : public QMainWindow {
         ~MainWindow();
 
     private:
-        Ui::MainWindow *ui;
-        BoardFacade board;
-        QTableWidget* table;
-    protected slots:
-        void activate_debug_mode();
+        Ui::MainWindow *ui = nullptr;
+        solver_facade solver_m;
+
+        table_fragment* table_m = nullptr;
+        std::unique_ptr<DebugWindow> debugWindow;
+
+        void closeEvent(QCloseEvent* event) override;
+    private slots:
+            void switch_debug_mode();
+            void cell_clicked(int row, int column);
+            void on_pushButton_released();
 };
 
 #endif // MAINWINDOW_H
