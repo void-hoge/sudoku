@@ -2,6 +2,7 @@
 #define DEBUGWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidget>
 #include <qlabel.h>
 
 namespace Ui {
@@ -17,6 +18,7 @@ public:
     void indicate_row(int r);
     void indicate_column(int c);
     void indicate_abs_index(int i);
+    void focus_on(const QTableWidgetItem& i);
 
 private:
     Ui::DebugWindow *ui;

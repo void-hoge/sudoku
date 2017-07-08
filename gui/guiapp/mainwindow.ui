@@ -60,7 +60,7 @@
        <number>10</number>
       </property>
       <item>
-       <widget class="QTableWidget" name="tableWidget"/>
+       <widget class="table_fragment" name="tableWidget"/>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">
@@ -104,6 +104,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>table_fragment</class>
+   <extends>QTableWidget</extends>
+   <header>table_fragment.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

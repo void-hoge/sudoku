@@ -5,8 +5,9 @@
 #include <memory>
 #include <QMainWindow>
 #include <QTableWidgetItem>
+#include "mainwindow.h"
 #include "solver_facade.h"
-#include "../../16x16/Solver/Solver.h"
+#include "table_fragment.h"
 #include "debugwindow.h"
 
 namespace Ui {
@@ -20,10 +21,10 @@ class MainWindow : public QMainWindow {
         ~MainWindow();
 
     private:
-        Ui::MainWindow *ui;
+        Ui::MainWindow *ui = nullptr;
         solver_facade solver_m;
 
-        QTableWidget* table;
+        table_fragment* table_m = nullptr;
         std::unique_ptr<DebugWindow> debugWindow;
 
         void closeEvent(QCloseEvent* event) override;

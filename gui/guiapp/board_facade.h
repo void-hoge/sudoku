@@ -8,11 +8,11 @@
 class BoardFacade {
         Board board_m;
     public:
+        using board_expression = std::array<int, all_cells_count>;
         BoardFacade(Board& board);
         BoardFacade(Board&& board = Board());
 
-        void update();
-        std::array<int, all_cells_count> checked_array();
+        board_expression checked_array();
 };
 
 #endif // BOARD_FACADE_H

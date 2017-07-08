@@ -1,5 +1,6 @@
 #include "debugwindow.h"
 #include "ui_debugwindow.h"
+#include "table_fragment.h"
 
 DebugWindow::DebugWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::DebugWindow) {
     ui->setupUi(this);
@@ -45,4 +46,10 @@ void DebugWindow::indicate_column(int c) {
 void DebugWindow::indicate_abs_index(int i) {
     if (abs_index_textview_m == nullptr) throw std::runtime_error("Pointer to low abs index indicator is null!");
     else abs_index_textview_m->setText("(low abs index : " + QString::number(i) + ")");
+}
+
+void DebugWindow::focus_on(const QTableWidgetItem &i) {
+    indicate_row(i.row());
+    indicate_column(i.column());
+    indicate_abs_index(table_fragment::cast_to_abs(i.row(), i.column()));
 }

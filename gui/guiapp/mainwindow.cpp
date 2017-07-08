@@ -1,7 +1,7 @@
 #include <memory>
 #include <QString>
 #include <QTableWidget>
-#include "qtablewidgetcontroller.h"
+#include <QHeaderView>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "debugwindow.h"
@@ -10,26 +10,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     // init member
-    table = ui->tableWidget;
+    table_m = ui->tableWidget;
     // check
-    if (table == nullptr) std::runtime_error("Couldn't get ui components on MainWindow.");
+    if (table_m == nullptr) throw std::runtime_error("Couldn't get ui components on MainWindow.");
 
     // init widgets
-    table->setRowCount(eachside);
-    table->setColumnCount(eachside);
-    QTableWidgetItemAdapter controller(*table);
-    auto itr = controller.begin();
-    for (auto& i : solver_m.result().checked_array()) {
-        *itr = QTableWidgetItem(i == -1 ? " " : QString::number(i));
-        ++itr;
-    }
-    table->resizeColumnsToContents();
-    table->resizeRowsToContents();
-    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    table->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    table_m->show(solver_m.current_state().checked_array());
 
     connect(ui->actionSwitch_debug_mode, SIGNAL(triggered()), this, SLOT(switch_debug_mode()));
-    connect(table, SIGNAL(cellClicked(int,int)), this, SLOT(cell_clicked(int, int)));
+    connect(table_m, SIGNAL(cellClicked(int,int)), this, SLOT(cell_clicked(int, int)));
 }
 
 MainWindow::~MainWindow() {
@@ -51,14 +40,14 @@ void MainWindow::switch_debug_mode() {
 
 void MainWindow::cell_clicked(int row, int column) {
     if(debugWindow == nullptr) return;
+    else if (table_m == nullptr) throw std::runtime_error("table is uninitialized!");
     else {
-        debugWindow->indicate_row(row);
-        debugWindow->indicate_column(column);
-        QTableWidgetItemAdapter adap(*ui->tableWidget);
-        debugWindow->indicate_abs_index(adap.itemAt(row, column).abs_index());
+//        debugWindow->indicate_row(row);
+//        debugWindow->indicate_column(column);
+//        debugWindow->indicate_abs_index(table_fragment::cast_to_abs(row, column));
+        debugWindow->focus_on(table_m->ref_to_item(row, column));
     }
 }
 
 void MainWindow::on_pushButton_released() {
-    solver_m.solve();
 }

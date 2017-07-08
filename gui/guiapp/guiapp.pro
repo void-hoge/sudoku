@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = guiapp
 TEMPLATE = app
 
+CONFIG += c++14
+
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -27,21 +29,21 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     board_facade.cpp \
-    qtablewidgetcontroller.cpp \
     debugwindow.cpp \
     ../../16x16/Board/Board.cpp \
     ../../16x16/Solver/Solver.cpp \
-    solver_facade.cpp
+    solver_facade.cpp \
+    table_fragment.cpp
 
 HEADERS += \
     mainwindow.h \
     board_facade.h \
     param.h \
     debugwindow.h \
-    qtablewidgetcontroller.h \
     ../../16x16/Board/Board.h \
     ../../16x16/Solver/Solver.h \
-    solver_facade.h
+    solver_facade.h \
+    table_fragment.h
 
 FORMS += \
     mainwindow.ui \
