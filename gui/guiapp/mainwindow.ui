@@ -60,12 +60,12 @@
        <number>10</number>
       </property>
       <item>
-       <widget class="QTableWidget" name="tableWidget"/>
+       <widget class="table_fragment" name="tableWidget"/>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">
         <property name="text">
-         <string>PushButton</string>
+         <string>Start!</string>
         </property>
        </widget>
       </item>
@@ -88,19 +88,29 @@
    </property>
    <widget class="QMenu" name="menutools">
     <property name="title">
-     <string>tools</string>
+     <string>Tools</string>
     </property>
-    <addaction name="actionActivate_debug_mode"/>
+    <addaction name="actionSwitch_debug_mode"/>
    </widget>
    <addaction name="menutools"/>
   </widget>
-  <action name="actionActivate_debug_mode">
+  <action name="actionSwitch_debug_mode">
    <property name="text">
-    <string>Activate debug mode</string>
+    <string>Switch debug mode</string>
+   </property>
+   <property name="toolTip">
+    <string>switch debug mode</string>
    </property>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>table_fragment</class>
+   <extends>QTableWidget</extends>
+   <header>table_fragment.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
