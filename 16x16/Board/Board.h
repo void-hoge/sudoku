@@ -2,6 +2,7 @@
 #define __BOARD_HPP_INCLUDED__
 
 #include <bitset>
+#include <vector>
 using namespace std;
 
 #define base bitset<256>
@@ -10,6 +11,7 @@ class Board{
 public:
 	Board();
 	void input();
+	void vectorInput(vector<int>);
 	void output();
 	int check(int);
 	void put(int, int);
@@ -24,6 +26,7 @@ private:
 	void updateConfirmedCells();
 	void setConfirmedCells(int, int);
 	bool checkError();
+	void localization();
 };
 
 #endif

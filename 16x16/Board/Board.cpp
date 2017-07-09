@@ -1,4 +1,5 @@
 #include "Board.h"
+#include <vector>
 #include <bitset>
 #include <string.h>
 #include <iostream>
@@ -47,6 +48,17 @@ void Board::input(){
 	return;
 }
 
+void Board::vectorInput(std::vector<int> v){
+	for (int i = 0; i < v.size(); i++) {
+		if(v[i] == 0){
+			continue;
+		}
+		set(i, v[i]-1);
+		setConfirmedCells(i, v[i]-1);
+	}
+	return;
+}
+
 void Board::output(){
 	base scanner = 1;
 
@@ -66,12 +78,12 @@ void Board::output(){
 
 		for (int j = 0; j < 16; ++j){
 			if ((confirmedCells[j] & scanner) != 0){
-				cout << setw(3) << setfill(' ') << j+1;					//確定している場合
+				cout << setw(3) << setfill(' ') << j+1;
 				goto hoge;
 			}
 		}
 
-		cout <<setw(3) << setfill(' ') << " ";							//未確定の場合
+		cout <<setw(3) << setfill(' ') << " ";
 		hoge:;
 
 
@@ -204,4 +216,33 @@ void Board::setConfirmedCells(int coordinate, int c){
 bool Board::checkError(){
 	/*When there is a cell that can't substitute any thing.*/
 	return (~(OR(cells)) != 0);
+}
+
+const base unit1 = 0x1111111111111111;
+const base verticalMask = unit1 | (unit1 << 64) | (unit1 << 128) | (unit1 << 192);
+const base unit2 = 0x000000000000ffff;
+const base horizontalMask = unit2 | (unit2 << 64) | (unit2 << 128) | (unit2 << 192);
+
+void Board::localization(){
+	base scanVertical = 0, scanHorizontal = 0;
+	for (int i = 0; i < 16; i++) {
+		scanVertical = 		(cells[i] & verticalMask) | ((cells[i] & (verticalMask << 1)) >> 1) |
+							((cells[i] & (verticalMask << 2)) >> 2) | ((cells[i] & (verticalMask << 3)) >> 3);
+		scanHorizontal = 	(cells[i] & horizontalMask) | ((cells[i] & (horizontalMask << 1)) >> 1) |
+							((cells[i] & (horizontalMask << 2)) >> 2) | ((cells[i] & (horizontalMask << 3)) >> 3);
+		for (int j = 0; j < 16; j++) {
+			if ((scanVertical & blockMask[j]).count() == 1) {
+
+			}
+			if ((scanVertical & (xMask << (j*16))).count() == 1) {
+
+			}
+			if ((scanHorizontal & blockMask[j]).count() == 1) {
+
+			}
+			if((scanHorizontal & (yMask << j)).count() == 1) {
+
+			}
+		}
+	}
 }
