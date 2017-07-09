@@ -12,7 +12,7 @@ bool backtrack(Board q, int coordinate, int c){
 	}
 
 	if (q.isFinish()) {
-		q.output();
+		solution = q;
 		return true;
 	}
 
@@ -61,6 +61,10 @@ void Solver::solve(){
 		}
 	}
 	return;
+}
+
+int Solver::check(int coordinate) {
+	return solution.check(coordinate);
 }
 
 void Solver::testInput(){

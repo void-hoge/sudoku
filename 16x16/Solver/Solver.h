@@ -12,6 +12,7 @@ public:
 	void show();
 	void solve();
 	void testInput();
+	int check(int);
 	Board solution;
 private:
 	Board q;
