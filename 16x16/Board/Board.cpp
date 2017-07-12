@@ -233,7 +233,7 @@ void Board::localization(){
 							((cells[i] & (horizontalMask << 2)) >> 2) | ((cells[i] & (horizontalMask << 3)) >> 3);
 
 		for (int j = 0; j < 16; j++) {
-			if (((scanVertical & blockMask[j]).count() == 1) & (confirmedCells[i] & blockMask[j].count() != 1)) {
+			if (((scanVertical & blockMask[j]).count() == 1) & ((confirmedCells[i] & blockMask[j]).count() != 1)) {
 				base backup = cells[i] & blockMask[j];
 				int blockX = j / 4;
 				for (int k = 0; k < 4; k++) {
@@ -247,7 +247,7 @@ void Board::localization(){
 
 			}
 
-			if (((scanHorizontal & blockMask[j]).count() == 1) & (confirmedCells[i] & blockMask[j]).count() != 1) {
+			if (((scanHorizontal & blockMask[j]).count() == 1) & ((confirmedCells[i] & blockMask[j]).count() != 1)) {
 				base backup = cells[i] & blockMask[j];
 				int blockY = j % 4;
 				for (int k = 0; k < 4; k++) {
@@ -257,7 +257,7 @@ void Board::localization(){
 				cells[i] |= backup;
 			}
 
-			if(((scanHorizontal & (yMask << j)).count() == 1) & (confirmedCells[i] & (yMask << j)).count() != 1) {
+			if(((scanHorizontal & (yMask << j)).count() == 1) & ((confirmedCells[i] & (yMask << j)).count() != 1)) {
 				
 			}
 		}
