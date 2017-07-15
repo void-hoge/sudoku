@@ -233,12 +233,12 @@ void Board::localization(){
 							((cells[i] & (horizontalMask << 2)) >> 2) | ((cells[i] & (horizontalMask << 3)) >> 3);
 
 		for (int j = 0; j < 16; j++) {
-			if (((scanVertical & blockMask[j]).count() == 1) & (confirmedCells[i] & blockMask[j].count() != 1)) {
+			if (((scanVertical & blockMask[j]).count() == 1) & ((confirmedCells[i] & blockMask[j]).count() != 1)) {
 				base backup = cells[i] & blockMask[j];
 				int blockX = j / 4;
-				for (int k = 0; k < 4; k++) {
-					cells[i] |= (backup & (xMask << ((blockX + k) * 16))).count() * (xMask << ((blockX + k) * 16));
-				}
+//				for (int k = 0; k < 4; k++) {
+//					cells[i] |= (backup & (xMask << ((blockX + k) * 16))).count() * (xMask << ((blockX + k) * 16));
+//				}
 				cells[i] &= ~blockMask[j];
 				cells[i] |= backup;
 			}
@@ -247,17 +247,17 @@ void Board::localization(){
 
 			}
 
-			if (((scanHorizontal & blockMask[j]).count() == 1) & (confirmedCells[i] & blockMask[j]).count() != 1) {
+			if (((scanHorizontal & blockMask[j]).count() == 1) & ((confirmedCells[i] & blockMask[j]).count() != 1)) {
 				base backup = cells[i] & blockMask[j];
 				int blockY = j % 4;
-				for (int k = 0; k < 4; k++) {
-					cells[i] |= (backup & (yMask << (blockY + k))).count() * (yMask << (blockY + k));
-				}
+//				for (int k = 0; k < 4; k++) {
+//					cells[i] |= (backup & (yMask << (blockY + k))).count() * (yMask << (blockY + k));
+//				}
 				cells[i] &= ~blockMask[j];
 				cells[i] |= backup;
 			}
 
-			if(((scanHorizontal & (yMask << j)).count() == 1) & (confirmedCells[i] & (yMask << j)).count() != 1) {
+			if(((scanHorizontal & (yMask << j)).count() == 1) & ((confirmedCells[i] & (yMask << j)).count() != 1)) {
 				
 			}
 		}
