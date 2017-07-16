@@ -5,28 +5,30 @@
 using namespace std;
 
 bool backtrack(Board q, int coordinate, int c){
-	q.put(coordinate, c);
+    Board solution;
 
-	if (!q.update()) {
-		return false;
-	}
+    q.put(coordinate, c);
 
-	if (q.isFinish()) {
-		solution = q;
-		return true;
-	}
+    if (!q.update()) {
+        return false;
+    }
 
-	coordinate = q.emptyCell();
+    if (q.isFinish()) {
+        solution = q;
+        return true;
+    }
 
-	bitset<16> setable = q.setableNumber(coordinate);
-	for (int i = 0; i < 16; i++) {
-		if (setable[i] == 1) {
-			if (backtrack(q, coordinate, i)) {
-				return true;
-			}
-		}
-	}
-	return false;
+    coordinate = q.emptyCell();
+
+    bitset<16> setable = q.setableNumber(coordinate);
+    for (int i = 0; i < 16; i++) {
+        if (setable[i] == 1) {
+            if (backtrack(q, coordinate, i)) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 void Solver::input(){
