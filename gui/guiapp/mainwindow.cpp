@@ -43,4 +43,6 @@ void MainWindow::cell_clicked(int row, int column) {
 }
 
 void MainWindow::on_pushButton_released() {
+    solver_m.solve();
+    table_m->set_data(solver_m.current_state().checked_array());
 }
