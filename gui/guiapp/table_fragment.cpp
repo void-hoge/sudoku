@@ -5,12 +5,15 @@
 using namespace std::string_literals;
 
 table_fragment::table_fragment(QWidget *parent) : QTableWidget(parent) {
+    // Resize automatically adjusting to window.
     if (auto* hh = horizontalHeader()) hh->setSectionResizeMode(QHeaderView::Stretch);
         else throw std::runtime_error("Couldn't get horizon header");
     if (auto* vh = verticalHeader()) vh->setSectionResizeMode(QHeaderView::Stretch);
         else throw std::runtime_error("Couldn't get vertical header");
+    // Set table size
     setColumnCount(eachside);
     setRowCount(eachside);
+    // Set items
     for (auto i=0; i<all_cells_count; ++i) {
         setItem(cast_to_row(i), cast_to_col(i), new QTableWidgetItem(" "));
     }
@@ -30,6 +33,7 @@ QTableWidgetItem &table_fragment::ref_to_item(int abs) {
 
 QTableWidgetItem &table_fragment::ref_to_item(int row, int col) {
     QTableWidgetItem* ptr = item(row, col);
+    // Failed in fetching item
     if (ptr == nullptr) throw std::out_of_range(
                 std::to_string(row) + u8":"s + std::to_string(col) + u8" is out of range("s + std::to_string(all_cells_count) + u8")"s);
     return *ptr;
@@ -37,6 +41,7 @@ QTableWidgetItem &table_fragment::ref_to_item(int row, int col) {
 
 const QTableWidgetItem &table_fragment::ref_to_item_c(int row, int col) const {
     QTableWidgetItem* ptr = item(row, col);
+    // Failed in fetching item
     if (ptr == nullptr) throw std::out_of_range(
                 std::to_string(row) + u8":"s + std::to_string(col) + u8" is out of range("s + std::to_string(all_cells_count) + u8")"s);
     return *ptr;
@@ -51,7 +56,7 @@ board_expression table_fragment::packaged_data() {
     return ret;
 }
 
-void table_fragment::show(const board_expression &b) {
+void table_fragment::set_data(const board_expression &b) {
     for (size_t i=0; i<all_cells_count; ++i) {
         int num = b[i];
         operator[](i).setText(num == -1 ? " " : QString::number(num));
