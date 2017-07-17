@@ -48,3 +48,9 @@ void MainWindow::on_pushButton_released() {
     solver_m.solve(table_m->packaged_data());
     table_m->set_data(solver_m.current_state().checked_array());
 }
+
+void MainWindow::on_actionTest_Input_2_triggered()
+{
+    solver_m.low_solver().testInput();
+    table_m->set_data(solver_m.current_state().checked_array());
+}

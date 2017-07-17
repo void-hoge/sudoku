@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
-#include <qlabel.h>
+#include <QLabel>
 
 namespace Ui {
 class DebugWindow;
