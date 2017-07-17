@@ -12,7 +12,7 @@ class solver_facade {
         solver_facade(Solver& solver);
         solver_facade(Solver&& solver = Solver());
 
-        BoardFacade solve();
+        BoardFacade solve(const board_expression& b);
         BoardFacade current_state() noexcept;
 };
 

@@ -2,6 +2,8 @@
 #include <QString>
 #include <QTableWidget>
 #include <QHeaderView>
+#include <QtCore/QThread>
+#include <QProgressDialog>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "debugwindow.h"
@@ -43,6 +45,6 @@ void MainWindow::cell_clicked(int row, int column) {
 }
 
 void MainWindow::on_pushButton_released() {
-    solver_m.solve();
+    solver_m.solve(table_m->packaged_data());
     table_m->set_data(solver_m.current_state().checked_array());
 }
