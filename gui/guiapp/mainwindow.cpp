@@ -50,6 +50,7 @@ void MainWindow::on_pushButton_released() {
     table_m->set_data(solver_m.current_state());
 }
 
+// Test input
 void MainWindow::on_actionTest_Input_2_triggered() {
     solver_m.low_solver().testInput();
     table_m->set_data(solver_m.current_state());
