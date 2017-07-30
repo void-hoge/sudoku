@@ -7,6 +7,7 @@ DebugWindow::DebugWindow(QWidget *parent): QMainWindow(parent),
     row_textview_m { nullptr },
     column_textview_m { nullptr },
     abs_index_textview_m { nullptr },
+    contents_view_m { nullptr } {
 
     ui->setupUi(this);
 
@@ -49,6 +50,10 @@ void DebugWindow::indicate_column(int c) {
 
 void DebugWindow::indicate_abs_index(int i) {
     abs_index_textview_m->setText("(low abs index : " + QString::number(i) + ")");
+}
+
+void DebugWindow::indicate_content_number(int c) {
+    contents_view_m->setText(QString("Content : ") + QString::number(c));
 }
 
 void DebugWindow::focus_on(const QTableWidgetItem &i) {

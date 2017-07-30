@@ -18,6 +18,7 @@ public:
     void indicate_row(int r);
     void indicate_column(int c);
     void indicate_abs_index(int i);
+    void indicate_content_number(int c);
     void focus_on(const QTableWidgetItem& i);
 
 private:
