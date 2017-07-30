@@ -4,24 +4,20 @@
 #include <vector>
 using namespace std;
 
-bool backtrack(Board q, int coordinate, int c){
+Board poyo;
+
+bool backtrack(Board q, int coordinate, int c, Board* result){
 	q.put(coordinate, c);
 
-	if (!q.update()) {
-		return false;
-	}
-
 	if (q.isFinish()) {
-		solution = q;
+		*result = q;
 		return true;
 	}
-
-	coordinate = q.emptyCell();
 
 	bitset<16> setable = q.setableNumber(coordinate);
 	for (int i = 0; i < 16; i++) {
 		if (setable[i] == 1) {
-			if (backtrack(q, coordinate, i)) {
+			if (backtrack(q, coordinate, i, result)) {
 				return true;
 			}
 		}
@@ -55,7 +51,7 @@ void Solver::solve(){
 	bitset<16> setable = q.setableNumber(coordinate);
 	for (int i = 0; i < 16; i++) {
 		if (setable[i] == 1) {
-			if (backtrack(q, coordinate, i)) {
+			if (backtrack(q, coordinate, i, &solution)) {
 				return;
 			}
 		}

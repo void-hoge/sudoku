@@ -91,6 +91,7 @@
      <string>Tools</string>
     </property>
     <addaction name="actionSwitch_debug_mode"/>
+    <addaction name="actionTest_Input_2"/>
    </widget>
    <addaction name="menutools"/>
   </widget>
@@ -100,6 +101,16 @@
    </property>
    <property name="toolTip">
     <string>switch debug mode</string>
+   </property>
+  </action>
+  <action name="actionTest_Input">
+   <property name="text">
+    <string>Test Input</string>
+   </property>
+  </action>
+  <action name="actionTest_Input_2">
+   <property name="text">
+    <string>Test Input</string>
    </property>
   </action>
  </widget>

@@ -32,6 +32,7 @@ class MainWindow : public QMainWindow {
             void switch_debug_mode();
             void cell_clicked(int row, int column);
             void on_pushButton_released();
+            void on_actionTest_Input_2_triggered();
 };
 
 #endif // MAINWINDOW_H

@@ -13,15 +13,21 @@ class table_fragment : public QTableWidget {
 
         explicit table_fragment(QWidget *parent = nullptr);
 
+        // access to available items in the table.
+        // throws std::out_of_range passing point of uninitialized item.
         QTableWidgetItem& operator[](size_t i);
         const QTableWidgetItem& operator[](size_t i) const;
 
+        // Same as operator[]
         QTableWidgetItem& ref_to_item(int abs);
         QTableWidgetItem& ref_to_item(int row, int col);
         const QTableWidgetItem& ref_to_item_c(int row, int col) const;
 
+        // compile item data as std::array<size, int>
         board_expression packaged_data();
-        void show(const board_expression& b);
+
+        // set compiled data
+        void set_data(const board_expression& b);
 
     signals:
 

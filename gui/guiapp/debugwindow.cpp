@@ -2,7 +2,8 @@
 #include "ui_debugwindow.h"
 #include "table_fragment.h"
 
-DebugWindow::DebugWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::DebugWindow) {
+DebugWindow::DebugWindow(QWidget *parent):
+    QMainWindow(parent), ui(new Ui::DebugWindow) {
     ui->setupUi(this);
     // init member
     row_textview_m = ui->row_text;

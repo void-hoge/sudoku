@@ -12,7 +12,7 @@ class BoardFacade {
         BoardFacade(Board& board);
         BoardFacade(Board&& board = Board());
 
-        board_expression checked_array();
+        board_expression compile();
 };
 
 #endif // BOARD_FACADE_H
