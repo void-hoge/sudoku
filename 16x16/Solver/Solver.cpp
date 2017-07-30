@@ -9,17 +9,10 @@ Board poyo;
 bool backtrack(Board q, int coordinate, int c, Board* result){
 	q.put(coordinate, c);
 
-    q.put(coordinate, c);
-
 	if (q.isFinish()) {
 		*result = q;
 		return true;
 	}
-
-    if (q.isFinish()) {
-        solution = q;
-        return true;
-    }
 
 	bitset<16> setable = q.setableNumber(coordinate);
 	for (int i = 0; i < 16; i++) {
