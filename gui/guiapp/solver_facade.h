@@ -2,7 +2,7 @@
 #define SOLVER_FACADE_H
 
 #include "../../16x16/Solver/Solver.h"
-#include "board_facade.h"
+#include "board_util.h"
 #include "param.h"
 
 class solver_facade {
@@ -14,8 +14,8 @@ class solver_facade {
         solver_facade(Solver& solver);
         solver_facade(Solver&& solver = Solver());
 
-        BoardFacade solve(const board_expression& b);
-        BoardFacade current_state() noexcept;
+        board_expression solve(const board_expression& b);
+        board_expression current_state() noexcept;
 };
 
 #endif // SOLVER_FACADE_H

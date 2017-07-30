@@ -37,13 +37,13 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
-    board_facade.h \
     param.h \
     debugwindow.h \
     ../../16x16/Board/Board.h \
     ../../16x16/Solver/Solver.h \
     solver_facade.h \
-    table_fragment.h
+    table_fragment.h \
+    board_util.h
 
 FORMS += \
     mainwindow.ui \

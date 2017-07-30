@@ -1,14 +1,10 @@
-#include "board_facade.h"
+#include "board_util.h"
 #include "param.h"
 
-BoardFacade::BoardFacade(Board& board): board_m{board} { }
-
-BoardFacade::BoardFacade(Board&& board): board_m{board} { }
-
-std::array<int, all_cells_count> BoardFacade::compile() {
+board_expression compile(Board& b) {
     std::array<int, all_cells_count> ret;
     for (auto i=0; i<all_cells_count; ++i) {
-        ret.at(i) = board_m.check(i);
+        ret.at(static_cast<size_t>(i)) = b.check(i);
     }
     return ret;
 }
