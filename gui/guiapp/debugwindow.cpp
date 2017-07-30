@@ -1,3 +1,4 @@
+#include <cctype>
 #include "debugwindow.h"
 #include "ui_debugwindow.h"
 #include "table_fragment.h"
@@ -56,9 +57,21 @@ void DebugWindow::indicate_content_number(int c) {
     contents_view_m->setText(QString("Content : ") + QString::number(c));
 }
 
+void DebugWindow::indicate_content_NaN() {
+    contents_view_m->setText("NaN");
+}
+
 void DebugWindow::focus_on(const QTableWidgetItem &i) {
     indicate_row(i.row());
     indicate_column(i.column());
     indicate_abs_index(table_fragment::cast_to_abs(i.row(), i.column()));
-    indicate_content_number(i.text().toInt());
+    {
+        auto content = i.text().toStdString();
+        // if content consists of numbers
+        if (std::all_of(content.begin(), content.end(), isdigit)) indicate_content_number(std::stoi(content));
+        else {
+            if (content == " ") indicate_content_number(-1);    // only if that is a space char, not an error.
+            else indicate_content_NaN();
+        }
+    }
 }
