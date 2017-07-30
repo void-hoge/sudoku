@@ -60,4 +60,5 @@ void DebugWindow::focus_on(const QTableWidgetItem &i) {
     indicate_row(i.row());
     indicate_column(i.column());
     indicate_abs_index(table_fragment::cast_to_abs(i.row(), i.column()));
+    indicate_content_number(i.text().toInt());
 }
