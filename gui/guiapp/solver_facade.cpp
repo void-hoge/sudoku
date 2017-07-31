@@ -21,3 +21,8 @@ board_expression solver_facade::solve(const board_expression& b) {
 board_expression solver_facade::current_state() noexcept {
     return compile(solver_m.solution);
 }
+
+board_expression solver_facade::test_input() {
+    solver_m.testInput();
+    return compile(solver_m.q);
+}

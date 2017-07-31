@@ -16,6 +16,7 @@ class solver_facade {
 
         board_expression solve(const board_expression& b);
         board_expression current_state() noexcept;
+        board_expression test_input();
 };
 
 #endif // SOLVER_FACADE_H
