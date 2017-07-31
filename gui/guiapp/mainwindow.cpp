@@ -1,5 +1,6 @@
 #include <memory>
 #include <QString>
+#include <QDebug>
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QtCore/QThread>
@@ -46,12 +47,14 @@ void MainWindow::cell_clicked(int row, int column) {
 }
 
 void MainWindow::on_pushButton_released() {
-    solver_m.solve(table_m->packaged_data());
-    table_m->set_data(solver_m.current_state());
+    auto&& answer = solver_m.solve(table_m->packaged_data());
+    for(auto& i : answer) {
+        qDebug() << i;
+    }
+    table_m->set_data(answer);
 }
 
 // Test input
 void MainWindow::on_actionTest_Input_2_triggered() {
-    solver_m.low_solver().testInput();
-    table_m->set_data(solver_m.current_state());
+    table_m->set_data(solver_m.test_input());
 }
