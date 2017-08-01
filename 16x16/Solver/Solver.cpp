@@ -1,23 +1,25 @@
 #include "Solver.h"
 #include "../Board/Board.h"
 #include <bitset>
+#include <stdexcept>
+#include <iostream>
 #include <vector>
 using namespace std;
 
 Board poyo;
 
-bool backtrack(Board q, int coordinate, int c, Board* result){
-	q.put(coordinate, c);
+bool backtrack(Board p, int coordinate, int c, Board* q){
+	p.put(coordinate, c);
 
-	if (q.isFinish()) {
-		*result = q;
+	if (p.isFinish()) {
+		*q = p;
 		return true;
 	}
 
-	bitset<16> setable = q.setableNumber(coordinate);
+	bitset<16> setable = p.setableNumber(coordinate);
 	for (int i = 0; i < 16; i++) {
 		if (setable[i] == 1) {
-			if (backtrack(q, coordinate, i, result)) {
+			if (backtrack(p, coordinate, i, q)) {
 				return true;
 			}
 		}
@@ -34,33 +36,45 @@ void Solver::vectorInput(vector<int> v){
 }
 
 void Solver::show(){
-	solution.output();
+	q.output();
 }
 
 void Solver::solve(){
-	if (!q.update()) {
+	Board p = q;
+
+	if (!p.update()) {
 		return;
 	}
 
-	if (q.isFinish()) {
-		solution = q;
+	if (p.isFinish()) {
+		q = p;
 		return;
 	}
 
-	int coordinate = q.emptyCell();
-	bitset<16> setable = q.setableNumber(coordinate);
+	int coordinate = p.emptyCell();
+	bitset<16> setable = p.setableNumber(coordinate);
 	for (int i = 0; i < 16; i++) {
 		if (setable[i] == 1) {
-			if (backtrack(q, coordinate, i, &solution)) {
+			if (backtrack(p, coordinate, i, &q)) {
 				return;
 			}
 		}
 	}
+	throw runtime_error("This sudoku can't be solved.");
 	return;
 }
 
 int Solver::check(int coordinate) {
-	return solution.check(coordinate);
+	return q.check(coordinate);
+}
+
+void Solver::checkShow(){
+	for (int i = 0; i < 256; ++i){
+		if ((i % 16) == 0){
+			cout << endl; 
+		}
+		cout << check(i) << " ";
+	}
 }
 
 void Solver::testInput(){
