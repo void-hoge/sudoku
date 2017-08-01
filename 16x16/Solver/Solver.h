@@ -3,12 +3,11 @@
 
 #include "../Board/Board.h"
 #include <vector>
-using namespace std;
 
 class Solver{
 public:
 	void input();
-	void vectorInput(vector<int> v);
+	void vectorInput(std::vector<int> v);
 	void show();
 	void solve();
 	void testInput();
