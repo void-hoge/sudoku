@@ -95,7 +95,7 @@ void Board::output(){
 int Board::check(int coordinate){
 	for (int i = 0; i < 16; i++) {
 		if (confirmedCells[i][coordinate]) {
-			return i;
+			return i+1;
 		}
 	}
 	return (-1);
