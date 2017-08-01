@@ -10,7 +10,7 @@ class Board{
 public:
 	Board();
 	void input();
-	void vectorInput(vector<int>);
+	void vectorInput(std::vector<int>);
 	void output();
 	int check(int);
 	void put(int, int);
