@@ -1,24 +1,26 @@
-#ifndef __BOARD_H_INCLUDED__
-#define __BOARD_H_INCLUDED__
+#ifndef __BOARD_HPP_INCLUDED__
+#define __BOARD_HPP_INCLUDED__
 
 #include <bitset>
-using namespace std;
+#include <vector>
 
-#define base bitset<81>
+#define uint81 std::bitset<81>
 
 class Board{
 public:
 	Board();
 	void input();
+	void vectorInput(std::vector<int>);
 	void output();
+	int check(int);
 	void put(int, int);
 	bool update();
-	bitset<9> setableNumber(int);
+	std::bitset<9> setableNumber(int);
 	int emptyCell();
 	bool isFinish();
 private:
-	base cells[9];
-	base confirmedCells[9];
+	uint81 cells[9];
+	uint81 confirmedCells[9];
 	void set(int, int);
 	void updateConfirmedCells();
 	void setConfirmedCells(int, int);

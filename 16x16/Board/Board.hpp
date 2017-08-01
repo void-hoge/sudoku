@@ -4,7 +4,7 @@
 #include <bitset>
 #include <vector>
 
-#define base std::bitset<256>
+#define uint256 std::bitset<256>
 
 class Board{
 public:
@@ -19,8 +19,8 @@ public:
 	int emptyCell();
 	bool isFinish();
 private:
-	base cells[16];
-	base confirmedCells[16];
+	uint256 cells[16];
+	uint256 confirmedCells[16];
 	void set(int, int);
 	void updateConfirmedCells();
 	void setConfirmedCells(int, int);

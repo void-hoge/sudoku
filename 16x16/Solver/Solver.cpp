@@ -1,14 +1,13 @@
-#include "Solver.h"
-#include "../Board/Board.h"
+#include "Solver.hpp"
+#include "../Board/Board.hpp"
 #include <bitset>
 #include <stdexcept>
 #include <iostream>
 #include <vector>
 using namespace std;
 
-Board poyo;
-
 bool backtrack(Board p, int coordinate, int c, Board* q){
+
 	p.put(coordinate, c);
 
 	if (p.isFinish()) {
@@ -71,7 +70,7 @@ int Solver::check(int coordinate) {
 void Solver::checkShow(){
 	for (int i = 0; i < 256; ++i){
 		if ((i % 16) == 0){
-			cout << endl; 
+			cout << endl;
 		}
 		cout << check(i) << " ";
 	}
