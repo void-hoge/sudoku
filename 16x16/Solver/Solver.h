@@ -9,10 +9,10 @@ public:
 	void input();
 	void vectorInput(std::vector<int> v);
 	void show();
+	void checkShow();
 	void solve();
 	void testInput();
 	int check(int);
-	Board solution;
 	Board q;
 };
 
