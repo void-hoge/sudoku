@@ -25,7 +25,6 @@ private:
 	void updateConfirmedCells();
 	void setConfirmedCells(int, int);
 	bool checkError();
-	void localization();
 };
 
 #endif
