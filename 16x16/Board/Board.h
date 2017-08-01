@@ -3,9 +3,8 @@
 
 #include <bitset>
 #include <vector>
-using namespace std;
 
-#define base bitset<256>
+#define base std::bitset<256>
 
 class Board{
 public:
@@ -16,7 +15,7 @@ public:
 	int check(int);
 	void put(int, int);
 	bool update();
-	bitset<16> setableNumber(int);
+	std::bitset<16> setableNumber(int);
 	int emptyCell();
 	bool isFinish();
 private:
