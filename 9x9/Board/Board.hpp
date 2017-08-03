@@ -3,30 +3,28 @@
 
 #include <bitset>
 #include <vector>
-using namespace std;
 
-#define base bitset<256>
+#define uint81 std::bitset<81>
 
 class Board{
 public:
 	Board();
 	void input();
-	void vectorInput(vector<int>);
+	void vectorInput(std::vector<int>);
 	void output();
 	int check(int);
 	void put(int, int);
 	bool update();
-	bitset<16> setableNumber(int);
+	std::bitset<9> setableNumber(int);
 	int emptyCell();
 	bool isFinish();
 private:
-	base cells[16];
-	base confirmedCells[16];
+	uint81 cells[9];
+	uint81 confirmedCells[9];
 	void set(int, int);
 	void updateConfirmedCells();
 	void setConfirmedCells(int, int);
 	bool checkError();
-	void localization();
 };
 
 #endif

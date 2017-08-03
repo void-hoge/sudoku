@@ -1,24 +1,23 @@
-#include "Board.h"
+#include "Board.hpp"
 #include <vector>
 #include <bitset>
 #include <string.h>
 #include <iostream>
 #include <iomanip>
 using namespace std;
-#define base bitset<256>
 
-const base minBase = 0;
-const base maxBase = ~minBase;
-const base xMask = 0x000000000000ffff;
-const base constant = 0x0001000100010001;
-const base yMask = (constant << 192) | (constant << 128) | (constant << 64) | constant;
-const base constantBlock = 0x000f000f000f000f;
-const base blockMask[16] = {	((constantBlock << 0) << 0),	((constantBlock << 4) << 0),	((constantBlock << 8) << 0),	((constantBlock << 12) << 0),
+const uint256 minuint256 = 0;
+const uint256 maxuint256 = ~minuint256;
+const uint256 xMask = 0x000000000000ffff;
+const uint256 constant = 0x0001000100010001;
+const uint256 yMask = (constant << 192) | (constant << 128) | (constant << 64) | constant;
+const uint256 constantBlock = 0x000f000f000f000f;
+const uint256 blockMask[16] = {	((constantBlock << 0) << 0),	((constantBlock << 4) << 0),	((constantBlock << 8) << 0),	((constantBlock << 12) << 0),
 								((constantBlock << 0) << 64),	((constantBlock << 4) << 64),	((constantBlock << 8) << 64),	((constantBlock << 12) << 64),
 								((constantBlock << 0) << 128),	((constantBlock << 4) << 128),	((constantBlock << 8) << 128),	((constantBlock << 12) << 128),
 								((constantBlock << 0) << 192),	((constantBlock << 4) << 192),	((constantBlock << 8) << 192),	((constantBlock << 12) << 192)};
 
-base OR(base *n){
+uint256 OR(uint256 *n){
 	return n[0]|n[1]|n[2]|n[3]|n[4]|n[5]|n[6]|n[7]|n[8]|n[9]|n[10]|n[11]|n[12]|n[13]|n[14]|n[15];
 }
 
@@ -29,8 +28,8 @@ base OR(base *n){
 /*constructor*/
 Board::Board(){
 	for (int i = 0; i < 16; i++) {
-		cells[i] = maxBase;
-		confirmedCells[i] = minBase;
+		cells[i] = maxuint256;
+		confirmedCells[i] = minuint256;
 	}
 }
 
@@ -48,7 +47,7 @@ void Board::input(){
 	return;
 }
 
-void Board::vectorInput(std::vector<int> v){
+void Board::vectorInput(vector<int> v){
 	for (int i = 0; i < v.size(); i++) {
 		if(v[i] == 0){
 			continue;
@@ -60,7 +59,7 @@ void Board::vectorInput(std::vector<int> v){
 }
 
 void Board::output(){
-	base scanner = 1;
+	uint256 scanner = 1;
 
 	for (int i = 0; i < 256; ++i){
 		if (i % 16 == 0){
@@ -96,7 +95,7 @@ void Board::output(){
 int Board::check(int coordinate){
 	for (int i = 0; i < 16; i++) {
 		if (confirmedCells[i][coordinate]) {
-			return i;
+			return i+1;
 		}
 	}
 	return (-1);
@@ -109,12 +108,12 @@ void Board::put(int coordinate, int c){
 }
 
 bool Board::update(){
-	base backup[16];
-	memcpy(backup, confirmedCells, sizeof(base)*16);
+	uint256 backup[16];
+	memcpy(backup, confirmedCells, sizeof(uint256)*16);
 	updateConfirmedCells();
 	while ((OR(confirmedCells)&(~(OR(backup)))) != 0) {
 		for (int i = 0; i < 16; i++) {
-			base addition = (confirmedCells[i] & (~(backup[i])));
+			uint256 addition = (confirmedCells[i] & (~(backup[i])));
 			if (addition == 0) {
 				continue;
 			}
@@ -128,7 +127,7 @@ bool Board::update(){
 		if (checkError()) {
 			return false;
 		}
-		memcpy(backup, confirmedCells, sizeof(base)*16);
+		memcpy(backup, confirmedCells, sizeof(uint256)*16);
 		updateConfirmedCells();
 	}
 	return true;
@@ -143,7 +142,7 @@ bitset<16> Board::setableNumber(int coordinate){
 }
 
 int Board::emptyCell(){
-	base n = OR(confirmedCells);
+	uint256 n = OR(confirmedCells);
 	for (int i = 0; i < 256; i++) {
 		if (n[i] == false) {
 			return i;
@@ -164,7 +163,7 @@ void Board::set(int coordinate, int c){
 		cells[i][coordinate] = false;
 	}
 
-	base mask = 0;
+	uint256 mask = 0;
 	int x = coordinate /16, y = coordinate %16, block;
 	mask |= (xMask << (x*16));
 	mask |= (yMask << y);
@@ -189,7 +188,7 @@ void Board::updateConfirmedCells(){
 
 	for (int i = 0; i < 16; i++) {
 		for (int j = 0; j < 16; j++) {
-			base n = (cells[i] & (xMask << (j*16)));
+			uint256 n = (cells[i] & (xMask << (j*16)));
 			if (n.count() == 1) {
 				confirmedCells[i] |= n;
 			}
@@ -216,50 +215,4 @@ void Board::setConfirmedCells(int coordinate, int c){
 bool Board::checkError(){
 	/*When there is a cell that can't substitute any thing.*/
 	return (~(OR(cells)) != 0);
-}
-
-const base unit1 = 0x1111111111111111;
-const base verticalMask = unit1 | (unit1 << 64) | (unit1 << 128) | (unit1 << 192);
-const base unit2 = 0x000000000000ffff;
-const base horizontalMask = unit2 | (unit2 << 64) | (unit2 << 128) | (unit2 << 192);
-
-void Board::localization(){
-	base scanVertical = 0, scanHorizontal = 0;
-	for (int i = 0; i < 16; i++) {
-		scanVertical = 		(cells[i] & verticalMask) | ((cells[i] & (verticalMask << 1)) >> 1) |
-							((cells[i] & (verticalMask << 2)) >> 2) | ((cells[i] & (verticalMask << 3)) >> 3);
-
-		scanHorizontal = 	(cells[i] & horizontalMask) | ((cells[i] & (horizontalMask << 1)) >> 1) |
-							((cells[i] & (horizontalMask << 2)) >> 2) | ((cells[i] & (horizontalMask << 3)) >> 3);
-
-		for (int j = 0; j < 16; j++) {
-			if (((scanVertical & blockMask[j]).count() == 1) & ((confirmedCells[i] & blockMask[j]).count() != 1)) {
-				base backup = cells[i] & blockMask[j];
-				int blockX = j / 4;
-//				for (int k = 0; k < 4; k++) {
-//					cells[i] |= (backup & (xMask << ((blockX + k) * 16))).count() * (xMask << ((blockX + k) * 16));
-//				}
-				cells[i] &= ~blockMask[j];
-				cells[i] |= backup;
-			}
-
-			if (((scanVertical & (xMask << (j * 16))).count() == 1) & ((confirmedCells[i] & (xMask << (j * 16))).count() != 1)) {
-
-			}
-
-			if (((scanHorizontal & blockMask[j]).count() == 1) & ((confirmedCells[i] & blockMask[j]).count() != 1)) {
-				base backup = cells[i] & blockMask[j];
-				int blockY = j % 4;
-//				for (int k = 0; k < 4; k++) {
-//					cells[i] |= (backup & (yMask << (blockY + k))).count() * (yMask << (blockY + k));
-//				}
-				cells[i] &= ~blockMask[j];
-				cells[i] |= backup;
-			}
-
-			if(((scanHorizontal & (yMask << j)).count() == 1) & ((confirmedCells[i] & (yMask << j)).count() != 1)) {
-				
-			}
-		}
-	}
 }
