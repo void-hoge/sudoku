@@ -1,7 +1,7 @@
 #ifndef SOLVER_FACADE_H
 #define SOLVER_FACADE_H
 
-#include "../../16x16/Solver/Solver.h"
+#include "16x16/Solver/Solver.hpp"
 #include "board_util.h"
 #include "param.h"
 

@@ -30,20 +30,24 @@ SOURCES += \
     mainwindow.cpp \
     board_facade.cpp \
     debugwindow.cpp \
-    ../../16x16/Board/Board.cpp \
-    ../../16x16/Solver/Solver.cpp \
     solver_facade.cpp \
-    table_fragment.cpp
+    table_fragment.cpp \
+    16x16/Board/Board.cpp \
+    16x16/Solver/Solver.cpp \
+    9x9/Board/Board.cpp \
+    9x9/Solver/Solver.cpp
 
 HEADERS += \
     mainwindow.h \
     param.h \
     debugwindow.h \
-    ../../16x16/Board/Board.h \
-    ../../16x16/Solver/Solver.h \
     solver_facade.h \
     table_fragment.h \
-    board_util.h
+    board_util.h \
+    16x16/Board/Board.hpp \
+    16x16/Solver/Solver.hpp \
+    9x9/Board/Board.hpp \
+    9x9/Solver/Solver.hpp
 
 FORMS += \
     mainwindow.ui \

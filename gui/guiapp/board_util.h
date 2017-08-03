@@ -3,7 +3,7 @@
 
 #include <array>
 #include "param.h"
-#include "../../16x16/Board/Board.h"
+#include "16x16/Board/Board.hpp"
 
 using board_expression = std::array<int, all_cells_count>;
 
