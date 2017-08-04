@@ -1,9 +1,9 @@
 #include "board_facade.h"
 #include "param.h"
 
-BoardFacade::BoardFacade(Board& board): board_m{board} { }
+BoardFacade::BoardFacade(v16::Board& board): board_m{board} { }
 
-BoardFacade::BoardFacade(Board&& board): board_m{board} { }
+BoardFacade::BoardFacade(v16::Board&& board): board_m{board} { }
 
 std::array<int, all_cells_count> BoardFacade::compile() {
     std::array<int, all_cells_count> ret;

@@ -6,13 +6,13 @@
 #include "param.h"
 
 class solver_facade {
-        Solver solver_m;
+        v16::Solver solver_m;
 
     public:
-        Solver low_solver() { return  solver_m; }
+        v16::Solver low_solver() { return  solver_m; }
 
-        solver_facade(Solver& solver);
-        solver_facade(Solver&& solver = Solver());
+        solver_facade(v16::Solver& solver);
+        solver_facade(v16::Solver&& solver = v16::Solver());
 
         BoardFacade solve(const board_expression& b);
         BoardFacade current_state() noexcept;

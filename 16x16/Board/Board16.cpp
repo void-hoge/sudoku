@@ -5,6 +5,7 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
+using namespace v16;
 
 const uint256 minuint256 = 0;
 const uint256 maxuint256 = ~minuint256;

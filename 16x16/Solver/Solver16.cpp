@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+using namespace v16;
 
 bool backtrack(Board p, int coordinate, int c, Board* q){
 

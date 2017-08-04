@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
+using namespace v9;
 
 const uint81 minuint81 = 0;
 const uint81 maxuint81 = ~minuint81;

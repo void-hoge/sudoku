@@ -6,11 +6,11 @@
 #include "16x16/Board/Board16.hpp"
 
 class BoardFacade {
-        Board board_m;
+        v16::Board board_m;
     public:
         using board_expression = std::array<int, all_cells_count>;
-        BoardFacade(Board& board);
-        BoardFacade(Board&& board = Board());
+        BoardFacade(v16::Board& board);
+        BoardFacade(v16::Board&& board = v16::Board());
 
         board_expression compile();
 };
