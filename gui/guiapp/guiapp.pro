@@ -32,10 +32,10 @@ SOURCES += \
     debugwindow.cpp \
     solver_facade.cpp \
     table_fragment.cpp \
-    16x16/Board/Board.cpp \
-    16x16/Solver/Solver.cpp \
-    9x9/Board/Board.cpp \
-    9x9/Solver/Solver.cpp
+    16x16/Board/Board16.cpp \
+    16x16/Solver/Solver16.cpp \
+    9x9/Board/Board9.cpp \
+    9x9/Solver/Solver9.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -44,10 +44,10 @@ HEADERS += \
     solver_facade.h \
     table_fragment.h \
     board_util.h \
-    16x16/Board/Board.hpp \
-    16x16/Solver/Solver.hpp \
-    9x9/Board/Board.hpp \
-    9x9/Solver/Solver.hpp
+    16x16/Board/Board16.hpp \
+    16x16/Solver/Solver16.hpp \
+    9x9/Board/Board9.hpp \
+    9x9/Solver/Solver9.hpp
 
 FORMS += \
     mainwindow.ui \
