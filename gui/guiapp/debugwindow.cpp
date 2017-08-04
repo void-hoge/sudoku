@@ -70,7 +70,7 @@ void DebugWindow::focus_on(const QTableWidgetItem &i) {
         // if content consists of numbers
         if (std::all_of(content.begin(), content.end(), isdigit)) indicate_content_number(std::stoi(content));
         else {
-            if (content == " ") indicate_content_number(-1);    // only if that is a space char, not an error.
+            if (content == " ") indicate_content_number(0);    // only if that is a space char, not an error.
             else indicate_content_NaN();
         }
     }

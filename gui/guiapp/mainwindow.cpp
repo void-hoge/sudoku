@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     if (table_m == nullptr) throw std::runtime_error("Couldn't get ui components on MainWindow.");
 
     // init widgets
-    table_m->set_data(solver_m.current_state());
+    table_m->set_data(board_expression{});
 
     // connect
     connect(ui->actionSwitch_debug_mode, SIGNAL(triggered()), this, SLOT(switch_debug_mode()));

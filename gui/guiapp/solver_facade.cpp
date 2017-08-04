@@ -15,11 +15,11 @@ board_expression solver_facade::solve(const board_expression& b) {
     }
     solver_m.vectorInput(v);
     solver_m.solve();
-    return compile(solver_m.solution);
+    return compile(solver_m.q);
 }
 
 board_expression solver_facade::current_state() noexcept {
-    return compile(solver_m.solution);
+    return compile(solver_m.q);
 }
 
 board_expression solver_facade::test_input() {
