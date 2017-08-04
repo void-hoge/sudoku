@@ -1,4 +1,4 @@
-#include "Solver/Solver.hpp"
+#include "Solver/Solver16.hpp"
 using namespace std;
 
 int main(int argc, char const *argv[]) {

@@ -1,5 +1,4 @@
-#include "Solver.hpp"
-#include "../Board/Board.hpp"
+#include "Solver16.hpp"
 #include <bitset>
 #include <stdexcept>
 #include <iostream>

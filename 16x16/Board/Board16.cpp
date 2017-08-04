@@ -1,39 +1,42 @@
-#include "Board.hpp"
+#include "Board16.hpp"
+#include <vector>
 #include <bitset>
 #include <string.h>
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
-const uint81 minuint81 = 0;
-const uint81 maxuint81 = ~minuint81;
-const uint81 xMask = 0x1ff;
-const uint81 constant = 0x40201;
-const uint81 yMask = (constant << 54) | (constant << 27) | constant;
-const uint81 constantBlock = 0x1c0e07;
-const uint81 blockMask[9] = {	((constantBlock << 0) << 0),	((constantBlock << 3) << 0),	((constantBlock << 6) << 0),
-								((constantBlock << 0) << 27),	((constantBlock << 3) << 27),	((constantBlock << 6) << 27),
-								((constantBlock << 0) << 54),	((constantBlock << 3) << 54),	((constantBlock << 6) << 54)};
+const uint256 minuint256 = 0;
+const uint256 maxuint256 = ~minuint256;
+const uint256 xMask = 0x000000000000ffff;
+const uint256 constant = 0x0001000100010001;
+const uint256 yMask = (constant << 192) | (constant << 128) | (constant << 64) | constant;
+const uint256 constantBlock = 0x000f000f000f000f;
+const uint256 blockMask[16] = {	((constantBlock << 0) << 0),	((constantBlock << 4) << 0),	((constantBlock << 8) << 0),	((constantBlock << 12) << 0),
+								((constantBlock << 0) << 64),	((constantBlock << 4) << 64),	((constantBlock << 8) << 64),	((constantBlock << 12) << 64),
+								((constantBlock << 0) << 128),	((constantBlock << 4) << 128),	((constantBlock << 8) << 128),	((constantBlock << 12) << 128),
+								((constantBlock << 0) << 192),	((constantBlock << 4) << 192),	((constantBlock << 8) << 192),	((constantBlock << 12) << 192)};
 
-uint81 OR(uint81 *n){
-	return n[0]|n[1]|n[2]|n[3]|n[4]|n[5]|n[6]|n[7]|n[8];
+uint256 OR(uint256 *n){
+	return n[0]|n[1]|n[2]|n[3]|n[4]|n[5]|n[6]|n[7]|n[8]|n[9]|n[10]|n[11]|n[12]|n[13]|n[14]|n[15];
 }
+
 
 /**********************************public methods**********************************/
 
 
 /*constructor*/
 Board::Board(){
-	for (int i = 0; i < 9; i++) {
-		cells[i] = maxuint81;
-		confirmedCells[i] = minuint81;
+	for (int i = 0; i < 16; i++) {
+		cells[i] = maxuint256;
+		confirmedCells[i] = minuint256;
 	}
 }
 
 void Board::input(){
 	int n;
 
-	for (int i = 0; i < 81; ++i){
+	for (int i = 0; i < 256; ++i){
 		cin >> n;
 		if (n == 0){
 			continue;
@@ -46,7 +49,7 @@ void Board::input(){
 
 void Board::vectorInput(vector<int> v){
 	for (int i = 0; i < v.size(); i++) {
-		if (v[i] == 0) {
+		if(v[i] == 0){
 			continue;
 		}
 		set(i, v[i]-1);
@@ -56,42 +59,41 @@ void Board::vectorInput(vector<int> v){
 }
 
 void Board::output(){
-	uint81 scanner = 1;
+	uint256 scanner = 1;
 
-	for (int i = 0; i < 81; ++i){
-		if (i % 9 == 0){
+	for (int i = 0; i < 256; ++i){
+		if (i % 16 == 0){
 			cout << "|\n";
-			if (i % 9 == 0){
-				cout << "+--------+--------+--------+\n";
+			if (i % 64 == 0){
+				cout << "+-------+-------+-------+-------+-------+-------+-------+-------+\n";
 			}
 		}
 
-		if (i % 3 == 0){
+		if (i % 4 == 0){
 			cout << "|" ;
 		}	else{
 			cout << ":";
 		}
 
-		for (int j = 0; j < 9; ++j){
+		for (int j = 0; j < 16; ++j){
 			if ((confirmedCells[j] & scanner) != 0){
-				cout << setw(2) << setfill(' ') << j+1;
+				cout << setw(3) << setfill(' ') << j+1;
 				goto hoge;
 			}
 		}
 
-		cout <<setw(2) << setfill(' ') << " ";
+		cout <<setw(3) << setfill(' ') << " ";
 		hoge:;
 
 
 		scanner <<= 1;
 	}
 
-	cout << "|\n+--------+--------+--------+\n" << endl;
-
+	cout << "|\n+-------+-------+-------+-------+-------+-------+-------+-------+" << endl;
 }
 
 int Board::check(int coordinate){
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 16; i++) {
 		if (confirmedCells[i][coordinate]) {
 			return i+1;
 		}
@@ -106,16 +108,16 @@ void Board::put(int coordinate, int c){
 }
 
 bool Board::update(){
-	uint81 backup[9];
-	memcpy(backup, confirmedCells, sizeof(uint81)*9);
+	uint256 backup[16];
+	memcpy(backup, confirmedCells, sizeof(uint256)*16);
 	updateConfirmedCells();
 	while ((OR(confirmedCells)&(~(OR(backup)))) != 0) {
-		for (int i = 0; i < 9; i++) {
-			uint81 addition = (confirmedCells[i] & (~(backup[i])));
+		for (int i = 0; i < 16; i++) {
+			uint256 addition = (confirmedCells[i] & (~(backup[i])));
 			if (addition == 0) {
 				continue;
 			}
-			for (int j = 0; j < 81; j++) {
+			for (int j = 0; j < 256; j++) {
 				if (addition[j]) {
 					set(j, i);
 				}
@@ -125,23 +127,23 @@ bool Board::update(){
 		if (checkError()) {
 			return false;
 		}
-		memcpy(backup, confirmedCells, sizeof(uint81)*9);
+		memcpy(backup, confirmedCells, sizeof(uint256)*16);
 		updateConfirmedCells();
 	}
 	return true;
 }
 
-bitset<9> Board::setableNumber(int coordinate){
-	bitset<9> r;
-	for (int i = 0; i < 9; i++) {
+bitset<16> Board::setableNumber(int coordinate){
+	bitset<16> r;
+	for (int i = 0; i < 16; i++) {
 		r[i] = cells[i][coordinate];
 	}
 	return r;
 }
 
 int Board::emptyCell(){
-	uint81 n = OR(confirmedCells);
-	for (int i = 0; i < 81; i++) {
+	uint256 n = OR(confirmedCells);
+	for (int i = 0; i < 256; i++) {
 		if (n[i] == false) {
 			return i;
 		}
@@ -157,15 +159,15 @@ bool Board::isFinish(){
 
 
 void Board::set(int coordinate, int c){
-	for (int i = 0; i < 9; ++i){
+	for (int i = 0; i < 16; ++i){
 		cells[i][coordinate] = false;
 	}
 
-	uint81 mask = 0;
-	int x = coordinate /9, y = coordinate %9, block;
-	mask |= (xMask << (x*9));
+	uint256 mask = 0;
+	int x = coordinate /16, y = coordinate %16, block;
+	mask |= (xMask << (x*16));
 	mask |= (yMask << y);
-	block = (x/3)*3 + y/3;
+	block = (x/4)*4 + y/4;
 	mask |= (blockMask[block]);
 
 	cells[c] &= ~mask;
@@ -174,9 +176,9 @@ void Board::set(int coordinate, int c){
 }
 
 void Board::updateConfirmedCells(){
-	for (int i = 0; i < 9; ++i){
+	for (int i = 0; i < 16; ++i){
 		confirmedCells[i] = cells[i];
-		for (int j = 0; j < 9; ++j){
+		for (int j = 0; j < 16; ++j){
 			if (i == j){
 				continue;
 			}
@@ -184,9 +186,9 @@ void Board::updateConfirmedCells(){
 		}
 	}
 
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
-			uint81 n = (cells[i] & (xMask << (j*9)));
+	for (int i = 0; i < 16; i++) {
+		for (int j = 0; j < 16; j++) {
+			uint256 n = (cells[i] & (xMask << (j*16)));
 			if (n.count() == 1) {
 				confirmedCells[i] |= n;
 			}

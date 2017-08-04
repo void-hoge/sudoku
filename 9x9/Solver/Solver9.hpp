@@ -1,7 +1,7 @@
 #ifndef __SOLVER_HPP_INCLUDED__
 #define __SOLVER_HPP_INCLUDED__
 
-#include "../Board/Board.hpp"
+#include "../Board/Board9.hpp"
 #include <vector>
 
 class Solver{
