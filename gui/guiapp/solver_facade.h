@@ -1,8 +1,8 @@
 #ifndef SOLVER_FACADE_H
 #define SOLVER_FACADE_H
 
-#include "../../16x16/Solver/Solver.h"
 #include "board_facade.h"
+#include "16x16/Solver/Solver16.hpp"
 #include "param.h"
 
 class solver_facade {

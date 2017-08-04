@@ -15,9 +15,9 @@ BoardFacade solver_facade::solve(const board_expression& b) {
     }
     solver_m.vectorInput(v);
     solver_m.solve();
-    return solver_m.solution;
+    return solver_m.q;
 }
 
 BoardFacade solver_facade::current_state() noexcept {
-    return BoardFacade(solver_m.solution);
+    return BoardFacade(solver_m.q);
 }
