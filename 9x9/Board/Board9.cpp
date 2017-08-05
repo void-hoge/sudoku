@@ -97,7 +97,7 @@ int Board::check(int coordinate){
 			return i+1;
 		}
 	}
-	return (-1);
+    return 0;
 }
 
 void Board::put(int coordinate, int c){
