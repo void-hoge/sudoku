@@ -1,12 +1,13 @@
 #include "Solver.hpp"
-#include "../Board/Board.hpp"
 #include <bitset>
 #include <stdexcept>
 #include <iostream>
 #include <vector>
 using namespace std;
 
-bool backtrack(Board p, int coordinate, int c, Board* q){
+namespace v16{
+
+bool backtrack(b16::Board p, int coordinate, int c, b16::Board* q){
 
 	p.put(coordinate, c);
 
@@ -39,7 +40,7 @@ void Solver::show(){
 }
 
 void Solver::solve(){
-	Board p = q;
+	b16::Board p = q;
 
 	if (!p.update()) {
 		return;
@@ -98,4 +99,6 @@ void Solver::testInput(){
 	0, 6, 0, 8, 	0, 0, 13, 0, 	0, 4, 0, 3, 	2, 0, 0, 15};
 	vectorInput(v);
 	return;
+}
+
 }
