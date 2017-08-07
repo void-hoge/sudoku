@@ -11,9 +11,10 @@ struct V9_FLAG {
 };
 
 template <class T>
-constexpr int cells_count() {
-    return T::size * T::size;
-}
+constexpr int size = T::size;
+
+template <class T>
+constexpr int cells_count = T::size * T::size;
 
 template <class V16, class V9>
 struct V16_V9_Switcher {
