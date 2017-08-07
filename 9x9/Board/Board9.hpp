@@ -1,5 +1,5 @@
-#ifndef __BOARD_HPP_INCLUDED__
-#define __BOARD_HPP_INCLUDED__
+#ifndef BOARD9_HPP_INCLUDED
+#define BOARD9_HPP_INCLUDED
 
 #include <bitset>
 #include <vector>
