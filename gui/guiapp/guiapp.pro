@@ -47,7 +47,8 @@ HEADERS += \
     16x16/Board/Board16.hpp \
     16x16/Solver/Solver16.hpp \
     9x9/Board/Board9.hpp \
-    9x9/Solver/Solver9.hpp
+    9x9/Solver/Solver9.hpp \
+    utils.h
 
 FORMS += \
     mainwindow.ui \
