@@ -1,5 +1,5 @@
-#ifndef __SOLVER_HPP_INCLUDED__
-#define __SOLVER_HPP_INCLUDED__
+#ifndef SOLVER9_HPP_INCLUDED
+#define SOLVER9_HPP_INCLUDED
 
 #include "../Board/Board9.hpp"
 #include <vector>
