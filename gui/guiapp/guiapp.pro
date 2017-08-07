@@ -50,7 +50,8 @@ HEADERS += \
     9x9/Solver/Solver9.hpp \
     utils.h \
     point.h \
-    board.h
+    board.h \
+    solver.h
 
 FORMS += \
     mainwindow.ui \
