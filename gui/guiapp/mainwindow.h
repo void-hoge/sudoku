@@ -1,10 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <array>
 #include <memory>
 #include <QMainWindow>
-#include <QTableWidgetItem>
 #include "mainwindow.h"
 #include "solver_facade.h"
 #include "table_fragment.h"
@@ -22,10 +20,10 @@ class MainWindow : public QMainWindow {
 
     private:
         Ui::MainWindow *ui = nullptr;
-        solver_facade solver_m;
-
         table_fragment* table_m = nullptr;
         std::unique_ptr<DebugWindow> debugWindow;
+
+        solver_facade solver_m;
 
         void closeEvent(QCloseEvent* event) override;
     private slots:

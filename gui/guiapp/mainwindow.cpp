@@ -1,13 +1,5 @@
-#include <memory>
-#include <QString>
-#include <QDebug>
-#include <QTableWidget>
-#include <QHeaderView>
-#include <QtCore/QThread>
-#include <QProgressDialog>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "debugwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), solver_m {} {
     ui->setupUi(this);
@@ -48,9 +40,6 @@ void MainWindow::cell_clicked(int row, int column) {
 
 void MainWindow::on_pushButton_released() {
     auto&& answer = solver_m.solve(table_m->packaged_data());
-    for(auto& i : answer) {
-        qDebug() << i;
-    }
     table_m->set_data(answer);
 }
 
