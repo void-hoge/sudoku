@@ -22,7 +22,6 @@ uint81 OR(uint81 *n){
 
 /**********************************public methods**********************************/
 
-
 /*constructor*/
 Board::Board(){
 	for (int i = 0; i < 9; i++) {
