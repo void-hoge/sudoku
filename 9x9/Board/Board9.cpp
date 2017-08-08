@@ -20,8 +20,6 @@ uint81 OR(uint81 *n){
 	return n[0]|n[1]|n[2]|n[3]|n[4]|n[5]|n[6]|n[7]|n[8];
 }
 
-namespace b9 {
-
 /**********************************public methods**********************************/
 
 /*constructor*/
@@ -215,6 +213,4 @@ void Board::setConfirmedCells(int coordinate, int c){
 bool Board::checkError(){
 	/*When there is a cell that can't substitute any thing.*/
 	return (~(OR(cells)) != 0);
-}
-
 }
