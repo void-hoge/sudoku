@@ -1,10 +1,17 @@
+#include <cctype>
 #include "debugwindow.h"
 #include "ui_debugwindow.h"
 #include "table_fragment.h"
 
-DebugWindow::DebugWindow(QWidget *parent):
-    QMainWindow(parent), ui(new Ui::DebugWindow) {
+DebugWindow::DebugWindow(QWidget *parent): QMainWindow(parent),
+    ui(new Ui::DebugWindow),
+    row_textview_m { nullptr },
+    column_textview_m { nullptr },
+    abs_index_textview_m { nullptr },
+    contents_view_m { nullptr } {
+
     ui->setupUi(this);
+
     // init member
     row_textview_m = ui->row_text;
     column_textview_m = ui->column_text;
@@ -35,22 +42,36 @@ DebugWindow::~DebugWindow() {
 }
 
 void DebugWindow::indicate_row(int r) {
-    if (row_textview_m == nullptr) throw std::runtime_error("Pointer to row indicator is null!");
-    else row_textview_m->setText("Row : " + QString::number(r));
+    row_textview_m->setText("Row : " + QString::number(r));
 }
 
 void DebugWindow::indicate_column(int c) {
-    if (column_textview_m == nullptr) throw std::runtime_error("Pointer to column indicator is null!");
-    else column_textview_m->setText("Column : " + QString::number(c));
+    column_textview_m->setText("Column : " + QString::number(c));
 }
 
 void DebugWindow::indicate_abs_index(int i) {
-    if (abs_index_textview_m == nullptr) throw std::runtime_error("Pointer to low abs index indicator is null!");
-    else abs_index_textview_m->setText("(low abs index : " + QString::number(i) + ")");
+    abs_index_textview_m->setText("(low abs index : " + QString::number(i) + ")");
+}
+
+void DebugWindow::indicate_content_number(int c) {
+    contents_view_m->setText(QString("Content : ") + QString::number(c));
+}
+
+void DebugWindow::indicate_content_NaN() {
+    contents_view_m->setText("NaN");
 }
 
 void DebugWindow::focus_on(const QTableWidgetItem &i) {
     indicate_row(i.row());
     indicate_column(i.column());
     indicate_abs_index(table_fragment::cast_to_abs(i.row(), i.column()));
+    {
+        auto content = i.text().toStdString();
+        // if content consists of numbers
+        if (std::all_of(content.begin(), content.end(), isdigit)) indicate_content_number(std::stoi(content));
+        else {
+            if (content == " ") indicate_content_number(0);    // only if that is a space char, not an error.
+            else indicate_content_NaN();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 #include <memory>
 #include <QString>
+#include <QDebug>
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QtCore/QThread>
@@ -17,8 +18,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     if (table_m == nullptr) throw std::runtime_error("Couldn't get ui components on MainWindow.");
 
     // init widgets
-    table_m->set_data(solver_m.current_state().compile());
+    table_m->set_data(board_expression{});
 
+    // connect
     connect(ui->actionSwitch_debug_mode, SIGNAL(triggered()), this, SLOT(switch_debug_mode()));
     connect(table_m, SIGNAL(cellClicked(int,int)), this, SLOT(cell_clicked(int, int)));
 }
@@ -45,12 +47,14 @@ void MainWindow::cell_clicked(int row, int column) {
 }
 
 void MainWindow::on_pushButton_released() {
-    solver_m.solve(table_m->packaged_data());
-    table_m->set_data(solver_m.current_state().compile());
+    auto&& answer = solver_m.solve(table_m->packaged_data());
+    for(auto& i : answer) {
+        qDebug() << i;
+    }
+    table_m->set_data(answer);
 }
 
-void MainWindow::on_actionTest_Input_2_triggered()
-{
-    solver_m.low_solver().testInput();
-    table_m->set_data(solver_m.current_state().compile());
+// Test input
+void MainWindow::on_actionTest_Input_2_triggered() {
+    table_m->set_data(solver_m.test_input());
 }

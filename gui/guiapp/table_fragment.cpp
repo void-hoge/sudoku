@@ -51,7 +51,7 @@ board_expression table_fragment::packaged_data() {
     board_expression ret;
     for (size_t i=0; i<all_cells_count; ++i) {
         auto text = operator[](i).text();
-        ret[i] = text == " " ? -1 : text.toInt();
+        ret[i] = text == " " ? 0 : text.toInt();
     }
     return ret;
 }
@@ -59,6 +59,6 @@ board_expression table_fragment::packaged_data() {
 void table_fragment::set_data(const board_expression &b) {
     for (size_t i=0; i<all_cells_count; ++i) {
         int num = b[i];
-        operator[](i).setText(num == -1 ? " " : QString::number(num));
+        operator[](i).setText(num == 0 ? " " : QString::number(num));
     }
 }
