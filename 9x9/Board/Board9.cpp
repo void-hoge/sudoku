@@ -1,10 +1,9 @@
-#include "Board9.hpp"
+#include "Board.hpp"
 #include <bitset>
 #include <string.h>
 #include <iostream>
 #include <iomanip>
 using namespace std;
-using namespace v9;
 
 const uint81 minuint81 = 0;
 const uint81 maxuint81 = ~minuint81;
@@ -19,6 +18,8 @@ const uint81 blockMask[9] = {	((constantBlock << 0) << 0),	((constantBlock << 3)
 uint81 OR(uint81 *n){
 	return n[0]|n[1]|n[2]|n[3]|n[4]|n[5]|n[6]|n[7]|n[8];
 }
+
+namespace b9 {
 
 /**********************************public methods**********************************/
 
@@ -213,4 +214,6 @@ void Board::setConfirmedCells(int coordinate, int c){
 bool Board::checkError(){
 	/*When there is a cell that can't substitute any thing.*/
 	return (~(OR(cells)) != 0);
+}
+
 }
