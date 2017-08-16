@@ -1,7 +1,7 @@
 #ifndef __SOLVER_V16_INCLUDED__
 #define __SOLVER_V16_INCLUDED__
 
-#include "../Board/Board.hpp"
+#include "../Board/Board16.hpp"
 #include <vector>
 
 namespace v16 {
