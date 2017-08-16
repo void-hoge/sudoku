@@ -1,4 +1,4 @@
-#include "Board9.hpp"
+#include "Board16.hpp"
 #include <vector>
 #include <bitset>
 #include <string.h>
