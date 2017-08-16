@@ -1,4 +1,4 @@
-//g++ main.cpp 16x16/Solver/Solver16.cpp 16x16/Board/Board16.cpp 9x9/Solver/Solver16.cpp 9x9/Board/Board16.cpp
+//g++ main.cpp 16x16/Solver/Solver16.cpp 16x16/Board/Board16.cpp 9x9/Solver/Solver16.cpp 9x9/Board/Board16.cpp -std=c++11
 #include "16x16/Solver/Solver16.hpp"
 #include "9x9/Solver/Solver16.hpp"
 
