@@ -1,12 +1,13 @@
-#ifndef BOARD16_HPP_INCLUDED
-#define BOARD16_HPP_INCLUDED
+#ifndef __BOARD_V16_HPP_INCLUDED__
+#define __BOARD_V16_HPP_INCLUDED__
 
 #include <bitset>
 #include <vector>
 
 #define uint256 std::bitset<256>
 
-namespace v16 {
+namespace b16 {
+
     class Board{
     public:
         Board();

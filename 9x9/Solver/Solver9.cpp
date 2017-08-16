@@ -4,9 +4,10 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-using namespace v9;
 
-bool backtrack(Board p, int coordinate, int c, Board* q){
+namespace v9{
+
+bool backtrack(b9::Board p, int coordinate, int c, b9::Board* q){
 
 	p.put(coordinate, c);
 
@@ -39,7 +40,7 @@ void Solver::show(){
 }
 
 void Solver::solve(){
-	Board p = q;
+	b9::Board p = q;
 
 	if (!p.update()) {
 		return;
@@ -88,4 +89,6 @@ void Solver::testInput(){
 				0, 0, 0, 0, 8, 0, 0, 7, 9};
 	vectorInput(v);
 	return;
+}
+
 }

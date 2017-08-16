@@ -1,5 +1,5 @@
-#ifndef SOLVER9_HPP_INCLUDED
-#define SOLVER9_HPP_INCLUDED
+#ifndef __SOLVER_V9_HPP_INCLUDED__
+#define __SOLVER_V9_HPP_INCLUDED__
 
 #include "../Board/Board9.hpp"
 #include <vector>
@@ -14,7 +14,7 @@ namespace v9 {
         void solve();
         void testInput();
         int check(int);
-        Board q;
+        b9::Board q;
     };
 }
 

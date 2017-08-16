@@ -1,11 +1,11 @@
-#ifndef BOARD9_HPP_INCLUDED
-#define BOARD9_HPP_INCLUDED
+#ifndef __BOARD_V9_HPP_INCLUDED__
+#define __BOARD_V9_HPP_INCLUDED__
 
 #include <bitset>
 #include <vector>
 #define uint81 std::bitset<81>
 
-namespace v9 {
+namespace b9 {
     class Board{
     public:
         Board();

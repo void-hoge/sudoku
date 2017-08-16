@@ -1,5 +1,5 @@
-#ifndef SOLVER16_HPP_INCLUDED
-#define SOLVER16_HPP_INCLUDED
+#ifndef __SOLVER_V16_INCLUDED__
+#define __SOLVER_V16_INCLUDED__
 
 #include "../Board/Board16.hpp"
 #include <vector>
@@ -14,7 +14,7 @@ namespace v16 {
         void solve();
         void testInput();
         int check(int);
-        Board q;
+        b16::Board q;
     };
 }
 
