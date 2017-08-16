@@ -1,4 +1,4 @@
-#include "Solver.hpp"
+#include "Solver16.hpp"
 #include <bitset>
 #include <stdexcept>
 #include <iostream>
