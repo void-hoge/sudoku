@@ -1,7 +1,7 @@
 #ifndef __SOLVER_V9_HPP_INCLUDED__
 #define __SOLVER_V9_HPP_INCLUDED__
 
-#include "../Board/Board.hpp"
+#include "../Board/Board9.hpp"
 #include <vector>
 
 namespace v9 {
