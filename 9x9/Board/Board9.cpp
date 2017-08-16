@@ -1,4 +1,4 @@
-#include "Board.hpp"
+#include "Board9.hpp"
 #include <bitset>
 #include <string.h>
 #include <iostream>
