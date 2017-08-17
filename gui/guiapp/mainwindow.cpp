@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     if (table_m == nullptr) throw std::runtime_error("Couldn't get ui components on MainWindow.");
 
     // init widgets
-    table_m->set_data(board_expression{});
+    //table_m->set_data(board_expression{});
 
     // connect
     connect(ui->actionSwitch_debug_mode, SIGNAL(triggered()), this, SLOT(switch_debug_mode()));
@@ -39,11 +39,12 @@ void MainWindow::cell_clicked(int row, int column) {
 }
 
 void MainWindow::on_pushButton_released() {
-    auto&& answer = solver_m.solve(table_m->packaged_data());
-    table_m->set_data(answer);
+    solver_m.set_data(table_m->packaged_data());
+    solver_m.solve();
+    table_m->set_data(solver_m.content());
 }
 
 // Test input
 void MainWindow::on_actionTest_Input_2_triggered() {
-    table_m->set_data(solver_m.test_input());
+    //table_m->set_data(solver_m.test_input());
 }

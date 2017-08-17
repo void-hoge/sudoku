@@ -4,16 +4,26 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include <QLabel>
+#include "utils.h"
 
 namespace Ui {
-class DebugWindow;
+    class DebugWindow;
 }
 
 class DebugWindow : public QMainWindow {
     Q_OBJECT
+    int size;
 public:
     explicit DebugWindow(QWidget *parent = 0);
     ~DebugWindow();
+
+    // As Q_OBJECT can't have template parameter and custom constructor,
+    // DebugWindow can't decide which size to use.
+    // To pass the board type, call this method "BEFORE USING"
+    template <class TYPE>
+    void notice() const noexcept {
+        size = TYPE::size;
+    }
 
     void indicate_row(int r);
     void indicate_column(int c);

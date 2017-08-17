@@ -7,13 +7,13 @@
 
 template <class TYPE>
 class board {
-        using low_board_type = typename V16_V9_Switcher<v16::Board, v9::Board>::SwitchBy<TYPE>::type;
+        using low_board_type = typename V16_V9_Switcher<b16::Board, b9::Board>::SwitchBy<TYPE>::type;
         low_board_type board_m;
     public:
-        board(const low_board_type& init): board_m{init} {}
+        board(const low_board_type& init = low_board_type{}): board_m{init} {}
 
         int at(const point<TYPE>& p) {
-            return board_m.check(p.abs());
+            return board_m.check(p.abs_pos());
         }
 
         template <class T>
@@ -25,7 +25,7 @@ class board {
         }
 
         void set(const point<TYPE>& p, int data) {
-            board_m.put(p.abs(), data);
+            board_m.put(p.abs_pos(), data);
         }
 
         template <class T>

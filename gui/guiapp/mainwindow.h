@@ -3,7 +3,9 @@
 
 #include <memory>
 #include <QMainWindow>
+#include "solver.h"
 #include "mainwindow.h"
+#include "utils.h"
 #include "solver_facade.h"
 #include "table_fragment.h"
 #include "debugwindow.h"
@@ -23,7 +25,8 @@ class MainWindow : public QMainWindow {
         table_fragment* table_m = nullptr;
         std::unique_ptr<DebugWindow> debugWindow;
 
-        solver_facade solver_m;
+        //solver_facade solver_m;
+        solver<V16_FLAG> solver_m;
 
         void closeEvent(QCloseEvent* event) override;
     private slots:

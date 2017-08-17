@@ -27,23 +27,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp \
-    board_facade.cpp \
     debugwindow.cpp \
-    solver_facade.cpp \
     table_fragment.cpp \
     16x16/Board/Board16.cpp \
     16x16/Solver/Solver16.cpp \
     9x9/Board/Board9.cpp \
-    9x9/Solver/Solver9.cpp
+    9x9/Solver/Solver9.cpp \
+    window16.cpp \
+    launcher.cpp \
+    window9.cpp
 
 HEADERS += \
-    mainwindow.h \
     param.h \
     debugwindow.h \
-    solver_facade.h \
     table_fragment.h \
-    board_util.h \
     16x16/Board/Board16.hpp \
     16x16/Solver/Solver16.hpp \
     9x9/Board/Board9.hpp \
@@ -51,8 +48,14 @@ HEADERS += \
     utils.h \
     point.h \
     board.h \
-    solver.h
+    solver.h \
+    window16.h \
+    launcher.h \
+    window9.h
 
 FORMS += \
     mainwindow.ui \
-    debugwindow.ui
+    debugwindow.ui \
+    window16.ui \
+    launcher.ui \
+    window9.ui

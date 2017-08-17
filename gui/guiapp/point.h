@@ -14,7 +14,8 @@ class point final {
     public:
         point(int abs): abs_pos_m{abs} {
             if (abs_pos() < 0 || cells_count<TYPE> <= abs_pos())
-                throw std::invalid_argument("abs is out of range(0~" + std::to_string(cells_count<TYPE>) + ")");
+                throw std::invalid_argument{
+                    "abs is out of range(0~" + std::to_string(cells_count<TYPE>-1) + ") <-act " + std::to_string(abs)};
         }
         point(int r, int c): abs_pos_m{r + c*TYPE::size} {
             std::string msg;

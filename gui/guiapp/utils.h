@@ -18,12 +18,12 @@ constexpr int cells_count = T::size * T::size;
 
 template <class V16, class V9>
 struct V16_V9_Switcher {
-    static V16 judge(V16_FLAG&&);
-    static V9 jedge(V9_FLAG&&);
+    static V16 judge(V16_FLAG);
+    static V9 judge(V9_FLAG);
 
     template<class T>
     struct SwitchBy {
-        using type = decltype (jedge(T{}));
+        using type = decltype (judge(T{}));
     };
 
 };

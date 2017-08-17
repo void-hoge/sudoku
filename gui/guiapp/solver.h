@@ -15,8 +15,16 @@ class solver {
             solver_m.solve();
         }
 
+        void set_data(const board<TYPE>& b) {
+            solver_m.vectorInput(b.data());
+        }
+
         board<TYPE> content() {
             return board<TYPE>{ solver_m.q };
+        }
+
+        void test_input() {
+            solver_m.testInput();
         }
 };
 
