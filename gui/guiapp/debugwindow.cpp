@@ -1,9 +1,10 @@
 #include <cctype>
+#include <cassert>
 #include "debugwindow.h"
 #include "ui_debugwindow.h"
 #include "table_fragment.h"
 
-DebugWindow::DebugWindow(QWidget *parent): QMainWindow(parent),
+DebugWindow::DebugWindow(QWidget *parent): QMainWindow(parent), size{0},
     ui(new Ui::DebugWindow),
     row_textview_m { nullptr },
     column_textview_m { nullptr },
@@ -64,7 +65,11 @@ void DebugWindow::indicate_content_NaN() {
 void DebugWindow::focus_on(const QTableWidgetItem &i) {
     indicate_row(i.row());
     indicate_column(i.column());
-    indicate_abs_index(table_fragment::cast_to_abs(i.row(), i.column()));
+    if (size == V16_FLAG::size)
+        indicate_abs_index(point<V16_FLAG>{i.row(), i.column()}.abs_pos());
+    else if (size == V9_FLAG::size)
+        indicate_abs_index(point<V9_FLAG>{i.row(), i.column()}.abs_pos());
+    else assert(false);
     {
         auto content = i.text().toStdString();
         // if content consists of numbers

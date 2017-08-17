@@ -9,56 +9,65 @@ table_fragment::table_fragment(QWidget *parent) : QTableWidget(parent) {
     if (auto* hh = horizontalHeader()) hh->setSectionResizeMode(QHeaderView::Stretch);
         else throw std::runtime_error("Couldn't get horizon header");
     if (auto* vh = verticalHeader()) vh->setSectionResizeMode(QHeaderView::Stretch);
-        else throw std::runtime_error("Couldn't get vertical header");
-    // Set table size
-    setColumnCount(eachside);
-    setRowCount(eachside);
-    // Set items
-    for (auto i=0; i<all_cells_count; ++i) {
-        setItem(cast_to_row(i), cast_to_col(i), new QTableWidgetItem(" "));
+    else throw std::runtime_error("Couldn't get vertical header");
+}
+
+template<>
+board<V9_FLAG> table_fragment::data() {
+    if (V9_FLAG::size != size) std::logic_error("Tmp param TYPE is not compatible with current table size.");
+    board<V9_FLAG> b;
+    for (int i=0; i<size*size; ++i) {
+        auto&& p = point<V9_FLAG>{i};
+        auto&& text = at(p).text();
+        b.set(p, text == " " ? 0 : text.toInt());
+    }
+    return b;
+}
+
+template <>
+board<V16_FLAG> table_fragment::data() {
+    if (V16_FLAG::size != size) std::logic_error("Tmp param TYPE is not compatible with current table size.");
+    board<V16_FLAG> b;
+    for (int i=0; i<size*size; ++i) {
+        auto&& p = point<V16_FLAG>{i};
+        auto&& text = at(p).text();
+        b.set(p, text == " " ? 0 : text.toInt());
+    }
+    return b;
+}
+
+template <>
+void table_fragment::set_data(board<V9_FLAG>& b) {
+    for (int i=0; i<size*size; ++i) {
+        auto&& p = point<V9_FLAG>{i};
+        auto&& num = b.at(p);
+        at(p).setText(num == 0 ? " " : QString::number(num));
     }
 }
 
-QTableWidgetItem &table_fragment::operator[](size_t i) {
-    return ref_to_item(cast_to_row(static_cast<int>(i)), cast_to_col(static_cast<int>(i)));
-}
-
-const QTableWidgetItem &table_fragment::operator[](size_t i) const {
-    return ref_to_item_c(cast_to_row(static_cast<int>(i)), cast_to_col(static_cast<int>(i)));
-}
-
-QTableWidgetItem &table_fragment::ref_to_item(int abs) {
-    return ref_to_item(cast_to_row(abs), cast_to_col(abs));
-}
-
-QTableWidgetItem &table_fragment::ref_to_item(int row, int col) {
-    QTableWidgetItem* ptr = item(row, col);
-    // Failed in fetching item
-    if (ptr == nullptr) throw std::out_of_range(
-                std::to_string(row) + u8":"s + std::to_string(col) + u8" is out of range("s + std::to_string(all_cells_count) + u8")"s);
-    return *ptr;
-}
-
-const QTableWidgetItem &table_fragment::ref_to_item_c(int row, int col) const {
-    QTableWidgetItem* ptr = item(row, col);
-    // Failed in fetching item
-    if (ptr == nullptr) throw std::out_of_range(
-                std::to_string(row) + u8":"s + std::to_string(col) + u8" is out of range("s + std::to_string(all_cells_count) + u8")"s);
-    return *ptr;
-}
-
-board_expression table_fragment::packaged_data() {
-    board_expression ret;
-    for (size_t i=0; i<all_cells_count; ++i) {
-        auto text = operator[](i).text();
-        ret[i] = text == " " ? 0 : text.toInt();
+template <>
+void table_fragment::set_data(board<V16_FLAG>& b) {
+    for (int i=0; i<size*size; ++i) {
+        auto&& p = point<V16_FLAG>{i};
+        auto&& num = b.at(p);
+        at(p).setText(num == 0 ? " " : QString::number(num));
     }
-    return ret;
 }
 
-void table_fragment::set_data(const board_expression &b) {
-    for (size_t i=0; i<all_cells_count; ++i) {
-        int num = b[i];
-        operator[](i).setText(num == 0 ? " " : QString::number(num));
+template <>
+void table_fragment::set_data(board<V9_FLAG>&& b) {
+    for (int i=0; i<size*size; ++i) {
+        auto&& p = point<V9_FLAG>{i};
+        auto&& num = b.at(p);
+        at(p).setText(num == 0 ? " " : QString::number(num));
+    }
+}
+
+template <>
+void table_fragment::set_data(board<V16_FLAG>&& b) {
+    for (int i=0; i<size*size; ++i) {
+        auto&& p = point<V16_FLAG>{i};
+        auto&& num = b.at(p);
+        at(p).setText(num == 0 ? " " : QString::number(num));
     }
 }
